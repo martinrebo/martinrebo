@@ -1,10 +1,3 @@
-Thought for a couple of seconds
-
-
-Here’s the Markdown with some 🎉 emojis sprinkled in and a link to the official docs:
-
----
-
 # Node.js Basics 🚀
 
 ## Table of Contents
