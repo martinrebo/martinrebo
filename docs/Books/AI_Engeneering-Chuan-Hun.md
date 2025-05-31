@@ -80,6 +80,34 @@ are commonly used for non-generative tasks such as sentiment analysis and text c
 - **Scaling Laws:** Scaling laws describe how the performance of a model changes as its size, data, or compute resources are increased. They provide insights into how to effectively scale models to achieve better performance on various tasks. Scaling laws can help guide decisions about model architecture, training data, and computational resources.
   
 #### Post-Training
+Post-training is unlocking the capabilities that the pre-trained model already has but are hard for users to access via prompting alone.
+
+- **Supervised finetuning (SFT)**: Finetune the pre-trained model on high-quality instruction data to optimize models for conversations instead of completion.
+- **Preference finetuning:** Further finetune the model to output responses that align with human preference. Preference finetuning is typically done with reinforcement learning (RL)
+
+#### Sampling
+
+- **Sampling:** Sampling is the process of selecting a subset of data from a larger dataset to train or evaluate a model. It can be done randomly or based on specific criteria, and it is essential for creating representative datasets that capture the underlying patterns in the data.
+
+-- **Logits:** Logits are the raw output scores produced by a model before applying a softmax function to convert them into probabilities. They represent the unnormalized confidence of the model for each class or token in a classification task.
+
+- **Softmax:** Softmax is a mathematical function that converts logits into probabilities by exponentiating each logit and normalizing the results. It ensures that the output probabilities sum to 1, making them interpretable as confidence scores for each class or token.
+
+- **Temperature:** Temperature is a hyperparameter that controls the randomness of the sampling process. A higher temperature results in more diverse and creative outputs, while a lower temperature produces more conservative and focused responses. It is often used to balance exploration and exploitation in model outputs. Temperature is a constant used to adjust the logits before the softmax transformation
+
+- **Top-k sampling:** Top-k is a sampling strategy to reduce the computation workload without sacrificing too much of the model’s response diversity. Top-k sampling is a technique that restricts the sampling process to the top k most probable tokens, ensuring that only the most likely options are considered. This helps to reduce randomness and improve the quality of generated text by focusing on high-probability tokens. A smaller k value makes the text more predictable but less interesting, as the model is limited to a smaller set of likely words.
+
+- **Top-p sampling (nucleus sampling):** Top-p sampling is a technique that selects tokens based on their cumulative probability, ensuring that the sum of probabilities of the selected tokens is greater than or equal to a specified threshold p.
+  In top-p sampling, the model sums the probabilities of the most likely next values in descending order and stops when the sum reaches p.
+
+- **Stopping Condition:** The stopping condition is a criterion used to determine when to stop generating text. It can be based on various factors, such as reaching a maximum length, encountering a specific token (like an end-of-sentence token), or achieving a certain level of confidence in the generated output. Setting appropriate stopping conditions is crucial for controlling the length and coherence of generated text.
+
+- **Test Time Compute:**  ()Test time compute refers to the computational resources required to run a model during inference or testing. It includes the time and memory needed to process input data, generate predictions, and perform any necessary post-processing. Efficient test time compute is essential for deploying models in real-time applications where quick responses are required.
+
+- **Structured Output:** Structured output refers to generating outputs that follow a specific format or structure, such as JSON, XML, or other predefined formats. This is particularly useful for tasks like data extraction, where the model needs to produce outputs that can be easily parsed and used in downstream applications.
+
+## Chapter 3: Evaluation Methodology
+
 
 
 # Fun Facts
