@@ -109,9 +109,28 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 ## Chapter 3: Evaluation Methodology
 
 
+### Understanding Evaluation Methodology
+
+- **Entropy:** Entropy measures how much information, on average, a token carries. The higher the entropy, the more information each token carries, and the more bits are needed to represent a token. Intuitively, entropy measures how difficult it is to predict what comes next in a language. The lower a language’s entropy (the less information a token of a language carries), the more predictable that language. 
+- **Cross-Entropy:** A language model’s cross entropy on a dataset measures how difficult it is for the language model to predict what comes next in this dataset. 
+  Cross-entropy is a measure of the difference between two probability distributions, often used to evaluate how well a model's predicted distribution matches the true distribution of the data. It quantifies the average number of bits needed to encode the true distribution using the model's predicted distribution.
+
+- **Bits Per Character (BPC):** Bits per character is a metric that measures the average number of bits required to represent each character in a text. It is calculated by dividing the cross-entropy by the logarithm of the base 2 of the vocabulary size. BPC provides a way to compare the efficiency of different language models in terms of how well they compress text data.
+- **Bits per Byte (BPP):** Bits per byte is a metric similar to bits per character, but it measures the average number of bits required to represent each byte in a text. It is calculated by dividing the cross-entropy by the logarithm of the base 2 of 256 (the number of possible byte values). BPP is often used to evaluate the efficiency of models in terms of how well they compress binary data.
+- **Perplexity:** Perplexity is a measure of how well a language model predicts a sample. It is calculated as the exponentiation of the cross-entropy, providing an intuitive understanding of how "confused" the model is when predicting the next token. Lower perplexity indicates better performance, as it means the model is more confident in its predictions.
+  Remember that the more uncertainty the model has in predicting what comes next in a given dataset, the higher the perplexity.
+  More structured data gives lower expected perplexity
+  The bigger the vocabulary, the higher the perplexity
+  The longer the context length, the lower the perplexity
+
+### Exact Evaluation
+
+
+
+
+
 
 # Fun Facts
-
 
 - The first AI program was written in 1951 by Christopher Strachey, who later became director of the Programming Research Group at the University of Oxford. It was a checkers (draughts) game that ran on the Ferranti Mark I computer at the University of Manchester. (Vibe Copilot suggestion)
 
