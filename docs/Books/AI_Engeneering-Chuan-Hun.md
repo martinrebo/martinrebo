@@ -155,6 +155,18 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 
 ### AI as a Judge
   
+  Because there are many possible ways to use AI judges, there are many possible specialized AI judges. Here, I’ll go over examples of three specialized judges: reward models, reference-based judges, and preference models:
+- **Reward Models:** Reward models are AI systems trained to evaluate the quality of generated responses based on specific criteria. They assign a numerical score to each response, indicating its quality or relevance. Reward models can be used to guide the training of other models, such as reinforcement learning agents, by providing feedback on their performance. Cappy is an example of a reward model developed by Google (2023). 
+  
+- **Reference-based Judges:** Reference-based judges are AI systems that evaluate generated responses by comparing them to reference responses. They can use various metrics, such as exact match, lexical similarity, or semantic similarity, to assess the quality of the generated text. Reference-based judges are useful for tasks where a specific set of reference responses is available, such as question answering or text generation.
+  
+- **Preference Models:** Preference models are AI systems that learn to rank generated responses based on human preferences. They can be trained using pairwise comparisons, where humans indicate which of two responses they prefer. Preference models can be used to improve the quality of generated text by selecting the most preferred responses from a set of candidates.
+
+- **Pairwise Comparisons:** Pairwise comparisons are a method of evaluating generated responses by comparing them in pairs and determining which one is preferred. This approach allows for more nuanced evaluations, as it captures human preferences more effectively than single-response evaluations. Pairwise comparisons can be used to train preference models or to evaluate the quality of generated text in a more detailed manner.
+
+## Chapter 4: Evaluating AI Systems
+
+ 
 
 # Fun Facts
 
