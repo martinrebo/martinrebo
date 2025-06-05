@@ -166,9 +166,30 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 
 ## Chapter 4: Evaluating AI Systems
 
- 
+ A model is only useful if it works for its intended purposes. You need to evaluate models in the context of your application
 
-# Fun Facts
+ Which is worse—an application that has never been deployed or an application that is deployed but no one knows whether it’s working? When I asked this question at conferences, most people said the latter. An application that is deployed but can’t be evaluated is worse. It costs to maintain, but if you want to take it down, it might cost even more.
+
+### Evaluation Criteria
+
+- **Domain Specific Capability:** Domain-specific capabilities are commonly evaluated using exact evaluation.While functional correctness is important, it might not be the only aspect that you care about. You might also care about efficiency and cost.
+
+- **Generation Capability:** Metrics used to evaluate the quality of generated texts back then included fluency and coherence. Fluency measures whether the text is grammatically correct and natural-sounding (does this sound like something written by a fluent speaker?). Coherence measures how well-structured the whole text is (does it follow a logical structure?). Each task might also have its own metrics. For example, a metric a translation task might use is faithfulness: how faithful is the generated translation to the original sentence? A metric that a summarization task might use is relevance: does the summary focus on the most important aspects of the source document? (Li et al., 2022).
+
+  Generative models, with their new capabilities and new use cases, have new issues that require new metrics to track. The most pressing issue is undesired hallucinations. Hallucinations are desirable for creative tasks, not for tasks that depend on factuality. A metric that many application developers want to measure is factual consistency. Another issue commonly tracked is safety: can the generated outputs cause harm to users and society? Safety is an umbrella term for all types of toxicity and biases.
+
+  - **Factual Consistency:** Factual consistency is a measure of how well the generated text aligns with known facts or information. It evaluates whether the content is accurate and reliable, especially in tasks like question answering, summarization, and information retrieval. Factual consistency is crucial for applications that require trustworthiness and credibility in the generated outputs.
+  
+    Verifying whether a statement is consistent with a given context can also be framed as textual entailment, which is a long-standing NLP task.4 Textual entailment is the task of determining the relationship between two statements. Given a premise (context), it determines which category a hypothesis (the output or part of the output) falls into:
+
+      Entailment: the hypothesis can be inferred from the premise.
+      Contradiction: the hypothesis contradicts the premise.
+      Neutral: the premise neither entails nor contradicts the hypothesis.
+  
+- **Intruction Following:** Instruction following is a measure of how well a model can understand and execute instructions provided in natural language. It evaluates the model's ability to comprehend the task requirements and generate appropriate responses or actions based on those instructions. Instruction following is essential for applications that involve user interaction, such as chatbots and virtual assistants.
+
+
+## Fun Facts
 
 - The first AI program was written in 1951 by Christopher Strachey, who later became director of the Programming Research Group at the University of Oxford. It was a checkers (draughts) game that ran on the Ferranti Mark I computer at the University of Manchester. (Vibe Copilot suggestion)
 
