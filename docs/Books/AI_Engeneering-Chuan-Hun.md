@@ -188,6 +188,26 @@ Post-training is unlocking the capabilities that the pre-trained model already h
   
 - **Intruction Following:** Instruction following is a measure of how well a model can understand and execute instructions provided in natural language. It evaluates the model's ability to comprehend the task requirements and generate appropriate responses or actions based on those instructions. Instruction following is essential for applications that involve user interaction, such as chatbots and virtual assistants.
 
+### Model Selection
+
+- **Model Selection:** Model selection is the process of choosing the best model for a specific task or application based on evaluation criteria. It involves comparing different models' performance, efficiency, and suitability for the intended use case. Model selection is crucial for ensuring that the chosen model meets the requirements and expectations of the application.
+
+  Hard attributes are often the results of decisions made by model providers (licenses, training data, model size) or your own policies (privacy, control).
+
+  Soft attributes are attributes that can be improved upon, such as accuracy, toxicity, or factual consistency. 
+
+Workflow - Build vs Buy - Navigate public benchmarks. 
+
+You can detect contamination using heuristics like n-gram overlapping and perplexity
+
+### Designing your Evaluation Pipeline
+
+1. Evaluate All components in a System
+2. Create an Evaluation Guideline
+3. Define Evaluation Methods and Data
+   
+
+
 
 ## Fun Facts
 
