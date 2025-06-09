@@ -1,4 +1,4 @@
-# AI Engineering by Chuan Huen
+# AI Engineering by Chip Huyen
 
 ## Metadata
 Github: chip huen  https://github.com/chiphuyen/aie-book
@@ -19,9 +19,9 @@ Github: chip huen  https://github.com/chiphuyen/aie-book
     The set of all tokens a model can work with is the model’s vocabulary. You can use a small number of tokens to construct a large number of distinct words, similar to how you can use a few letters in the alphabet to construct many words.
 
 - **Masked vs Autogregressive (Language Model):**
-- -  A masked language model is trained to predict missing tokens anywhere in a sequence, using the context from both before and after the missing tokens. 
+  - A masked language model is trained to predict missing tokens anywhere in a sequence, using the context from both before and after the missing tokens. 
 are commonly used for non-generative tasks such as sentiment analysis and text classification. They are also useful for tasks requiring an understanding of the overall context, such as code debugging
-- - An autoregressive language model is trained to predict the next token in a sequence, using only the preceding tokens.
+  - An autoregressive language model is trained to predict the next token in a sequence, using only the preceding tokens.
 
 - **Modeling and training:** Modeling and training refers to the process of coming up with a model architecture, training it, and finetuning it. Examples of tools in this category are Google’s TensorFlow, Hugging Face’s Transformers, and Meta’s PyTorch.
 
@@ -44,6 +44,7 @@ are commonly used for non-generative tasks such as sentiment analysis and text c
 ## Chapter 2: Undestanding Foundation Models
 
 ### Training Data
+
 - **Sampling:** Sampling is how a model chooses an output from all possible options
 
 - [Colossal Clean Crawled Corpus (C4)](https://arxiv.org/abs/1910.10683v4)
@@ -51,7 +52,7 @@ are commonly used for non-generative tasks such as sentiment analysis and text c
 - Multilingual Models:
 - Domain-Specific Models: [DeepMind’s AlphaFold](https://oreil.ly/JX37g), trained on the sequences and 3D structures of around 100,000 known proteins. [NVIDIA’s BioNeMo](https://oreil.ly/M1Nsc) is another model that focuses on biomolecular data for drug discovery. [Google’s Med-PaLM2](https://oreil.ly/F76hq) combined the power of an LLM with medical data to answer medical queries with higher accuracy.
 
-### Modeling 
+### Modeling
 
 #### Transformer Architecture
 
@@ -63,12 +64,14 @@ are commonly used for non-generative tasks such as sentiment analysis and text c
 - **RNNs:** Recurrent Neural Networks (RNNs) are a type of neural network designed for sequential data, where the output from previous steps is fed as input to the current step. They are particularly useful for tasks like language modeling and time series prediction, but they can struggle with long-range dependencies due to vanishing gradients.
   
 - **Attention Mechanism:** The attention mechanism allows a model to focus on specific parts of the input sequence when generating an output, improving performance on tasks like translation and summarization. It calculates a weighted sum of the input representations, enabling the model to attend to relevant information dynamically.
-- **Query Vector:** The query vector is a representation of the current token or context that the model is processing. It is used to compute attention scores against the key vectors of the input sequence.
- - **Key Vector:** The key vector is a representation of each token in the input sequence. It is used to compute attention scores against the query vector, determining how much attention should be paid to each token.
-- **Value Vector:** The value vector is a representation of the input tokens that are used to compute the final output of the attention mechanism. It is weighted by the attention scores derived from the query and key vectors.
+  
+* **Query Vector:** The query vector is a representation of the current token or context that the model is processing. It is used to compute attention scores against the key vectors of the input sequence.
+* **Key Vector:** The key vector is a representation of each token in the input sequence. It is used to compute attention scores against the query vector, determining how much attention should be paid to each token.
+* **Value Vector:** The value vector is a representation of the input tokens that are used to compute the final output of the attention mechanism. It is weighted by the attention scores derived from the query and key vectors.
+
 - **Transformer Block:** A transformer block is a building block of the transformer architecture, consisting of multi-head self-attention and feed-forward networks. It processes input sequences in parallel, allowing for efficient handling of long-range dependencies. The exact content of the block varies between models, but, in general, each transformer block contains the attention module and the MLP (multi-layer perceptron) module. 
   - **Attention module:** Each attention module consists of four weight matrices: query, key, value, and output projection.
-    - **MLP module** is a feed-forward neural network that processes the output of the attention module. It typically consists of two linear layers with a non-linear activation function (like ReLU) in between.
+  - **MLP module** is a feed-forward neural network that processes the output of the attention module. It typically consists of two linear layers with a non-linear activation function (like ReLU) in between.
   
 #### Model Size
 
@@ -80,6 +83,7 @@ are commonly used for non-generative tasks such as sentiment analysis and text c
 - **Scaling Laws:** Scaling laws describe how the performance of a model changes as its size, data, or compute resources are increased. They provide insights into how to effectively scale models to achieve better performance on various tasks. Scaling laws can help guide decisions about model architecture, training data, and computational resources.
   
 #### Post-Training
+
 Post-training is unlocking the capabilities that the pre-trained model already has but are hard for users to access via prompting alone.
 
 - **Supervised finetuning (SFT)**: Finetune the pre-trained model on high-quality instruction data to optimize models for conversations instead of completion.
@@ -89,7 +93,7 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 
 - **Sampling:** Sampling is the process of selecting a subset of data from a larger dataset to train or evaluate a model. It can be done randomly or based on specific criteria, and it is essential for creating representative datasets that capture the underlying patterns in the data.
 
--- **Logits:** Logits are the raw output scores produced by a model before applying a softmax function to convert them into probabilities. They represent the unnormalized confidence of the model for each class or token in a classification task.
+- **Logits:** Logits are the raw output scores produced by a model before applying a softmax function to convert them into probabilities. They represent the unnormalized confidence of the model for each class or token in a classification task.
 
 - **Softmax:** Softmax is a mathematical function that converts logits into probabilities by exponentiating each logit and normalizing the results. It ensures that the output probabilities sum to 1, making them interpretable as confidence scores for each class or token.
 
@@ -108,10 +112,9 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 
 ## Chapter 3: Evaluation Methodology
 
-
 ### Understanding Evaluation Methodology
 
-- **Entropy:** Entropy measures how much information, on average, a token carries. The higher the entropy, the more information each token carries, and the more bits are needed to represent a token. Intuitively, entropy measures how difficult it is to predict what comes next in a language. The lower a language’s entropy (the less information a token of a language carries), the more predictable that language. 
+- **Entropy:** Entropy measures how much information, on average, a token carries. The higher the entropy, the more information each token carries, and the more bits are needed to represent a token. Intuitively, entropy measures how difficult it is to predict what comes next in a language. The lower a language’s entropy (the less information a token of a language carries), the more predictable that language.
 - **Cross-Entropy:** A language model’s cross entropy on a dataset measures how difficult it is for the language model to predict what comes next in this dataset. 
   Cross-entropy is a measure of the difference between two probability distributions, often used to evaluate how well a model's predicted distribution matches the true distribution of the data. It quantifies the average number of bits needed to encode the true distribution using the model's predicted distribution.
 
@@ -147,7 +150,7 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 
   - Cosine similarity is a common method for calculating semantic similarity, where the cosine of the angle between two vectors (embeddings) is used to measure their similarity. A cosine similarity of 1 indicates that the vectors are identical, while a cosine similarity of 0 indicates that they are orthogonal (completely dissimilar).
   - Metrics for semantic textual similarity include BERTScore (embeddings are generated by BERT) and MoverScore (embeddings are generated by a mixture of algorithms). 
-   
+
   However, the reliability of semantic similarity depends on the quality of the underlying embedding algorithm. Two texts with the same meaning can still have a low semantic similarity score if their embeddings are bad.
 
 - **Embeddings:** Embeddings are numerical representations of text that capture semantic meaning. They are often used in natural language processing tasks to compare the similarity between texts. Embeddings can be generated using various models, such as BERT, GPT, or Word2Vec, and they allow for efficient computation of semantic similarity.
@@ -156,7 +159,8 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 ### AI as a Judge
   
   Because there are many possible ways to use AI judges, there are many possible specialized AI judges. Here, I’ll go over examples of three specialized judges: reward models, reference-based judges, and preference models:
-- **Reward Models:** Reward models are AI systems trained to evaluate the quality of generated responses based on specific criteria. They assign a numerical score to each response, indicating its quality or relevance. Reward models can be used to guide the training of other models, such as reinforcement learning agents, by providing feedback on their performance. Cappy is an example of a reward model developed by Google (2023). 
+
+- **Reward Models:** Reward models are AI systems trained to evaluate the quality of generated responses based on specific criteria. They assign a numerical score to each response, indicating its quality or relevance. Reward models can be used to guide the training of other models, such as reinforcement learning agents, by providing feedback on their performance. Cappy is an example of a reward model developed by Google (2023).
   
 - **Reference-based Judges:** Reference-based judges are AI systems that evaluate generated responses by comparing them to reference responses. They can use various metrics, such as exact match, lexical similarity, or semantic similarity, to assess the quality of the generated text. Reference-based judges are useful for tasks where a specific set of reference responses is available, such as question answering or text generation.
   
@@ -194,7 +198,7 @@ Post-training is unlocking the capabilities that the pre-trained model already h
 
   Hard attributes are often the results of decisions made by model providers (licenses, training data, model size) or your own policies (privacy, control).
 
-  Soft attributes are attributes that can be improved upon, such as accuracy, toxicity, or factual consistency. 
+  Soft attributes are attributes that can be improved upon, such as accuracy, toxicity, or factual consistency.
 
 Workflow - Build vs Buy - Navigate public benchmarks. 
 
@@ -205,9 +209,52 @@ You can detect contamination using heuristics like n-gram overlapping and perple
 1. Evaluate All components in a System
 2. Create an Evaluation Guideline
 3. Define Evaluation Methods and Data
-   
 
 ## Chapter 5: Prompt Engineering
+
+### Intro
+
+- A prompt is an instruction given to a model to perform a task.
+- How much prompt engineering is needed depends on how robust the model is to prompt perturbation.
+- Most models, including GPT-4, empirically perform better when the task description is at the beginning of the prompt. However, some models, including Llama 3, seem to perform better when the task description is at the end of the prompt.
+
+#### In-Context Learning: Zero-Shot and Few-Shot
+
+- Teaching models what to do via prompts is also known as in-context learning.
+  - In-context learning allows a model to incorporate new information continually to make decisions, preventing it from becoming outdated.
+  - Each example provided in the prompt is called a shot. Teaching a model to learn from examples in the prompt is also called few-shot learning. With five examples, it’s 5-shot learning. When no example is provided, it’s zero-shot learning.
+
+#### System Prompt and user prompt
+
+- Many model APIs give you the option to split a prompt into a system prompt and a user prompt. You can think of the system prompt as the task description and the user prompt as the task.
+- Training a model to prioritize system prompts also helps mitigate prompt attacks, as discussed later in this chapter.
+
+#### Context Length and Context Efficiency
+
+Not all parts of a prompt are equal. Research has shown that a model is much better at understanding instructions given at the beginning and the end of a prompt than in the middle (Liu et al., 2023). One way to evaluate the effectiveness of different parts of a prompt is to use a test commonly known as the needle in a haystack (NIAH). The idea is to insert a random piece of information (the needle) in different locations in a prompt (the haystack) and ask the model to find it
+
+### Prompt best practices
+
+Each model provide its own prompting guides and best practices. 
+
+1. Write clear and Explicit intructions
+2. Provide sufficient Context
+3. Break complex tasks into subtaks
+4. Give model time to think using chain-of-thought (CoT) and self-critique prompting.
+5. Iterate your prompts
+6. Evaluate Prompt Engineering Tools
+7. Organize and Version Prompts
+
+### Defensive Prompt Engineering
+
+1. Prompt extraction
+    Extracting the application’s prompt, including the system prompt, either to replicate or exploit the application
+
+2. Jailbreaking and prompt injection
+  Getting the model to do bad things
+
+3. Information extraction
+  Getting the model to reveal its training data or information used in its context
 
 
 ## Fun Facts
