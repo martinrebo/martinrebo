@@ -543,4 +543,174 @@
     ```
 
 39. Encapsulate Conditional Statements
+40. Flatten Nested Conditional Statements
+41. Redesign Conditional Statements
 
+    * Avoid Conditional Chains. Implement the functionality inside the entity itself. This might require to make the change in the database. (Eg. product discounts)
+
+42. Don't emit events to communicate
+
+    * Avoid using events across your whole app. Call the functions (createListener - services from other modules) manually
+    * Event listeners good practices on the browser but not on the server.
+    * In a small scope are ok,
+
+43. Use modules as Singletons
+
+    * Singleton is a pattern used when you want to control how many instances of an object you have. A class implementation is the best way to illustrate it. 
+    * In node is better to use it built-in system. 
+
+    ```js
+    export interface Logger { 
+    log: LogFunction; 
+    warn: LogFunction; 
+    error: LogFunction; 
+    } 
+
+    type LogFunction = (...args: any[]) => void; 
+
+    let logger: Logger = console; 
+
+    export function setLogger(customLogger: Logger) { 
+    logger = customLogger; 
+    } 
+
+    export default logger; 
+    ```
+
+44. Use consistent Async Practices
+45. Avoid blanket try/catch statements
+
+    * Use only in the parts that need to be protected
+    * better to write modular `try/catch` to show the exact place that produces the error.
+
+46. Favor Longer Names
+47. Put most important functions on top
+48. Aim for simplicity not ease
+49. Accept and object is your function goes beyond 3 values
+50. Program error out of existence
+51. Group Values in Context Objects (eg. Options - Context )
+
+## Chapter 2: Tooling
+
+1. Favor minimalistic tooling
+2. Favor Express as a framework
+3. Favor Query builders over ORMs (Knex, Mongo driver, Prisma ok)
+4. Favor Native methods to libraries
+5. Extracting Libraries
+6. Use a structured Logger (Splunk, new Relic, winston, pino)
+7. Document the application (Swagger, TS types documentation)
+8. Pin Dependency versions (remove ^ ~)
+9. Use TS
+10. Use Synk (log4j fiasco)
+11. Containerize the app
+12. Do not worry about DB/infra changes 
+13. Encapsulate configuration
+14. Use hierarchical config
+15. Don't use Native ES modules
+16. Create a project scaffold (template repo)
+17. Stabilize Local Development and Deployments
+18. Create Logger Object
+19. Create enriched loggers
+20. Logging for security purposes
+21. Log notable operations
+22. Use log management service
+
+    * Notice we accept it as a parameter of the factory function
+    * If you work with orchestrator (Kubernetes)
+
+    ```js
+    // logger.js 
+    const pino = require("pino"); 
+
+    function createLogger(level, transport) { 
+    const logger = pino({ level }, transport); 
+    return enrichLogger(logger); 
+    } 
+
+    // app.js 
+    const pinoElastic = require("pino-elasticsearch"); 
+
+    const ESTransport = pinoElastic({ 
+    index: "an-index", 
+    consistency: "one", 
+    node: "http://localhost:9200", 
+    "es-version": 7, 
+    "flush-bytes": 1000, 
+    }); 
+
+    const logger = createLogger("info", ESTransport);
+    ```
+
+23. Report and visualize metrics (OS Prometheus - Graphana)
+24. Deciding on instrumentation tools
+
+    * tracing (Jaeger, Zipkin) monitoring (Prometheus) loggin ELK(Elasticsearch, Logstash, Kibana)
+
+25. Distributed tracing
+26. Configure alerts (AWS CloudWatch)
+27. Consider OpenTelemetry (but not simpler than specific vendor)
+28. Create runbooks (to solve common issues)
+29. Create health checks 
+30. What steps to add in your CI pipeline
+31. Streamline the Deployment Process
+32. use PR environments 
+33. Utilize feature flags (unleash-flag, A/B)
+34. Use Database migrations and Seeders 
+35. Ensure your app restarts automatically
+
+### Chapter 3: Testing
+
+1. Favor Integration Testing
+2. Consider Dependency Injection over mocking (avoid complex DI containers)
+3. Unit Test the business logic (what is on your control)
+4. Invest in high test coverage
+5. Follow Arrange-Act-Assert Pattern
+6. Use TDD with Care
+7. Use an HTTP client for integrations tests
+8. Intercept HTTP request to external services (Axios interceptor, Nock, mock the response)
+9. Integration test should work in isolation. (populate db, delete isolation)
+10. Test with realistic data (use `faker` library)
+11. Avoid snapshot testing
+12. Don't test private functions
+13. Test Middleware functions (critical logic for auth, val)
+14. Don't write complex tests (better duplication that abstractions, better long test files all cases, simpler that implementation tested)
+
+### Chapter 4: Performance
+
+1. Don't block the event loop
+
+   * (parsing JSON, apply logic, complex regex, read files, ⇒ external queue)
+   * assets => HTML, CSS, JS, img by CDN or S3 bucket
+   * node i/o only
+
+2. Don't optimize for algorithmic complexity (very rare, better optimize queries for DB, external services, cache)
+3. Don't optimize prematurely (unless there is problem)
+4. Access Data Performant (DB root of performance)
+5. Be careful with async code (don't depend on async concurrent)(npm `dataloader` mostly GraphQL)
+6. Specify response timeouts and retry limits (better on client level not per request )
+
+### Chapter 5: Serverless Functions & GraphQL
+
+1. Use serverless functions as glue
+2. Serverless apps
+3. Structuring serverless functions
+4. Don't build serverless monoliths
+5. Minimize Serverless Functions's execution time
+6. Authentication in serverless functions
+7. Use Cloud Services instead of custom code
+8. Designing a serverless function
+9. How to structure a GraphQL server
+10. Avoid being a 1-1 Mapper to a call or Interface (in GraphQL)
+11. Avoid versioning (in GraphQL) use `deprecated`
+12. Create Specific Queries & Mutations
+13. Designing Queries and Mutations
+
+### Chapter 6: Scenarios 
+
+1. Extract a microservice from a monolith
+2. Changing the DB
+3. Decoupling legacy monoliths with Lambda
+4. Extracting microservices with GraphQl
+5. Deciding on a DB
+6. Authentication trade-offs
+7. Applying Patterns to Existing Projects
