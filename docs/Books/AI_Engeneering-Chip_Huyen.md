@@ -65,9 +65,9 @@ are commonly used for non-generative tasks such as sentiment analysis and text c
   
 - **Attention Mechanism:** The attention mechanism allows a model to focus on specific parts of the input sequence when generating an output, improving performance on tasks like translation and summarization. It calculates a weighted sum of the input representations, enabling the model to attend to relevant information dynamically.
   
-* **Query Vector:** The query vector is a representation of the current token or context that the model is processing. It is used to compute attention scores against the key vectors of the input sequence.
-* **Key Vector:** The key vector is a representation of each token in the input sequence. It is used to compute attention scores against the query vector, determining how much attention should be paid to each token.
-* **Value Vector:** The value vector is a representation of the input tokens that are used to compute the final output of the attention mechanism. It is weighted by the attention scores derived from the query and key vectors.
+- **Query Vector:** The query vector is a representation of the current token or context that the model is processing. It is used to compute attention scores against the key vectors of the input sequence.
+- **Key Vector:** The key vector is a representation of each token in the input sequence. It is used to compute attention scores against the query vector, determining how much attention should be paid to each token.
+- **Value Vector:** The value vector is a representation of the input tokens that are used to compute the final output of the attention mechanism. It is weighted by the attention scores derived from the query and key vectors.
 
 - **Transformer Block:** A transformer block is a building block of the transformer architecture, consisting of multi-head self-attention and feed-forward networks. It processes input sequences in parallel, allowing for efficient handling of long-range dependencies. The exact content of the block varies between models, but, in general, each transformer block contains the attention module and the MLP (multi-layer perceptron) module. 
   - **Attention module:** Each attention module consists of four weight matrices: query, key, value, and output projection.
@@ -255,6 +255,71 @@ Each model provide its own prompting guides and best practices.
 
 3. Information extraction
   Getting the model to reveal its training data or information used in its context
+
+## Chapter 6: RAG and Agents
+
+- This chapter focuses on how to construct the relevant context for each query. Two dominating patterns for context construction are RAG, or retrieval-augmented generation, and agents. The RAG pattern allows the model to retrieve relevant information from external data sources. The agentic pattern allows the model to use tools such as web search and news APIs to gather information.
+
+### RAG
+
+- RAG is a technique that enhances a model's generation by retrieving the relevant information from external memory sources. (DB, chat sessions, internet ... ). It constructs context specific to each query. 
+
+#### RAG Architecture
+
+- A RAG system has two components: a retriever that retrieves information from external memory sources and a generator that generates a response based on the retrieved information. 
+- The success of a RAG system depends on the quality of its retriever. A retriever has two main functions: indexing and querying. Indexing involves processing data so that it can be quickly retrieved later. Sending a query to retrieve data relevant to it is called querying. How to index data depends on how you want to retrieve it later on.
+
+#### Retrieval algorithms
+
+- Retrieval algorithms: Sparse vs Dense // term-based vs embedding-based
+- **Term-based:** lexical retrieval: Elasticsearch and BM25. TF-IDF is an algorithm that combines these two metrics: term frequency (TF) and inverse document frequency (IDF).
+- **Embedding-based:** semantic retrieval: Rank documents based on how closely their meaning align with the query, generating a `vector database`. (FAISS: FB AI Similarity Search / ScaNN: Scalable Nearest Neighbours google / Spotify Annoy )
+  - Vector DB organize data into buckets, trees or graphs. Vectors can be quantized (reduce precision) or made sparse. Check [zilliz](https://zilliz.com/learn/vector-index)
+- Context precision and context recall
+  
+#### Retrieval Optimization
+
+- **Chunking strategy** 
+- **Reranking**
+- **Query rewriting** (reformulation | normalization | expansion)
+- **Contextual retrieval**  (add tags and keywords)
+
+#### RAG beyond Texts
+
+- Multimodal RAG
+- RAG with tabular data
+
+### Agents
+
+- The goal of AI, emerging field with no frameworks to define, develop and evaluate them. 
+  
+#### Overview
+
+- An agent is anything that can perceive its environment and act upon that environment. (games, internet, road...)
+
+#### Tools
+
+- **Knowledge augmentation**
+- **Capability extension**
+- **Write actions**
+
+#### Planning
+
+- Planning overview: Decoupled from execution
+- Foundations models as planners
+- Plan generation
+
+#### Agent Failure Modes and Evaluation
+
+- Planing failures
+- Tool failures
+- Efficiency
+
+### Memory
+
+- Memory refers to mechanisms that allow a model to retain and utilize information. A memory system is especially useful for knowledge-rich applications like RAG and multi-step applications like agents. 
+
+
 
 
 ## Fun Facts
