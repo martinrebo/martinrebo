@@ -273,7 +273,7 @@ Each model provide its own prompting guides and best practices.
 
 - Retrieval algorithms: Sparse vs Dense // term-based vs embedding-based
 - **Term-based:** lexical retrieval: Elasticsearch and BM25. TF-IDF is an algorithm that combines these two metrics: term frequency (TF) and inverse document frequency (IDF).
-- **Embedding-based:** semantic retrieval: Rank documents based on how closely their meaning align with the query, generating a `vector database`. (FAISS: FB AI Similarity Search / ScaNN: Scalable Nearest Neighbours google / Spotify Annoy )
+- **Embedding-based:** semantic retrieval: Rank documents based on how closely their meaning align with the query, generating a `vector database`. (FAISS: FB AI Similarity Search / ScaNN: Scalable Nearest Neighbors google / Spotify Annoy )
   - Vector DB organize data into buckets, trees or graphs. Vectors can be quantized (reduce precision) or made sparse. Check [zilliz](https://zilliz.com/learn/vector-index)
 - Context precision and context recall
   
@@ -320,6 +320,56 @@ Each model provide its own prompting guides and best practices.
 - Memory refers to mechanisms that allow a model to retain and utilize information. A memory system is especially useful for knowledge-rich applications like RAG and multi-step applications like agents. 
 
 
+## Chapter 7: Finetuning
+
+### Overview
+
+* Finetuning is the process of adapting a model to a specific task by further training the whole model or part of the model. Finetuning adapts a model by adjusting its weights.
+* Finetuning isn’t the only way to do transfer learning. Another approach is feature-based transfer. In this approach, a model is trained to extract features from the data, usually as embedding vectors, which are then used by another model.
+* Finetuning is commonly used to improve a model’s ability to generate outputs following specific structures, such as JSON or YAML formats.
+* While finetuning a model for a specific task can improve its performance for that task, it can degrade its performance for other tasks.
+* Someone complains that prompting is ineffective and insists on finetuning. Upon investigation, it turns out that prompt experiments were minimal and unsystematic. Instructions were unclear, examples didn’t represent actual data, and metrics were poorly defined. After refining the prompt experiment process, the prompt quality improved enough to be sufficient for their application
+* In short, finetuning is for form, and RAG is for facts. 
+
+### Memory BottleNeck
+
+Because of the scale of foundation models, memory is a bottleneck for working with them, both for inference and for finetuning. The memory needed for finetuning is typically much higher than the memory needed for inference because of the way neural networks are trained.
+
+The key contributors to a model’s memory footprint during finetuning are its number of parameters, its number of trainable parameters, and its numerical representations.
+
+The more trainable parameters, the higher the memory footprint. You can reduce memory requirement for finetuning by reducing the number of trainable parameters. Reducing the number of trainable parameters is the motivation for PEFT, parameter-efficient finetuning.
+
+Quantization refers to the practice of converting a model from a format with more bits to a format with fewer bits. Quantization is a straightforward and efficient way to reduce a model’s memory footprint. For a model of 13 billion parameters, using FP32 means 4 bytes per weight or 52 GB for the whole weights. If you can reduce each value to only 2 bytes, the memory needed for the model’s weights decreases to 26 GB.
+
+Inference is typically done using as few bits as possible, such as 16 bits, 8 bits, and even 4 bits.
+
+Training is more sensitive to numerical precision, so it’s harder to train a model in lower precision. Training is typically done in mixed precision, with some operations done in higher precision (e.g., 32-bit) and some in lower precision (e.g., 16-bit or 8-bit).
+
+Training memory = model weights + activations + gradients + optimizer states
+
+
+- **Numerical values** in neural networks are traditionally represented as float numbers. The most common family of floating point formats is the FP family, which adheres to the Institute of Electrical and Electronics Engineers (IEEE) standard for Floating-Point Arithmetic (IEEE 754):
+
+While FP64 is still used in many computations—as of this writing, FP64 is the default format for NumPy and pandas—it’s rarely used in neural networks because of its memory footprint. 
+
+- **Quantization** Strictly speaking, it’s quantization only if the target format is integer. However, in practice, quantization is used to refer to all techniques that convert values to a lower-precision format. In this book, I use quantization to refer to precision reduction, to keep it consistent with the literature.
+
+### Finetuning Techniques
+
+- **Parameter-Efficient Finetuning (PEFT)** he idea of PEFT (parameter-efficient finetuning) was introduced by Houlsby et al. (2019). The authors showed that by inserting additional parameters into the model in the right places, you can achieve strong finetuning performance using a small number of trainable parameters. The existing prolific world of PEFT generally falls into two buckets: adapter-based methods and soft prompt-based methods. However, it’s likely that newer buckets will be introduced in the future.
+- **LoRA (Low-Rank Adaptation)** (Hu et al., 2021) incorporates additional parameters in a way that doesn’t incur extra inference latency. Instead of introducing additional layers to the base model, LoRA uses modules that can be merged back to the original layers.
+- **Model Merging and Multitask finetunning**
+- Finetuning tactics
+  - Base models
+  - Finetuning methods
+  - Frameworks (LLaMA-Factory, unsloth, PEFT, Axolotl, and LitGPT. )
+  - Finetune hyperparameters
+    - Learning rate
+    - Batch size
+    - Number of epochs
+    - Prompt loss weight
+
+## Chapter 8: Dataset Engineering
 
 
 ## Fun Facts
