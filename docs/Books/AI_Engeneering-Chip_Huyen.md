@@ -371,6 +371,87 @@ While FP64 is still used in many computations—as of this writing, FP64 is the 
 
 ## Chapter 8: Dataset Engineering
 
+* For the same model, different training phases aim to teach the model different capabilities, and, therefore, require datasets with different attributes. For example, data quantity for pre-training is often measured in the number of tokens, whereas data quantity for supervised finetuning is often measured in the number of examples. 
+* There are best practices you can follow and tools that you can use to automate parts of the process. However, data will mostly just be toil, tears, and sweat.
+
+### Data Curation
+
+- For self-supervised finetuning, you need sequences of data. For instruction finetuning, you need data in the (instruction, response) format. For preference finetuning, you need data in the (instruction, winning response, losing response) format. To train a reward model, you can use the same data format as preference finetuning or use data with annotated scores for each of your examples in the ((instruction, response), score) format.
+- When curating data for applications with conversation interfaces, you need to consider whether you require single-turn data, multi-turn data, or both. Single-turn data helps train a model to respond to individual instructions. Multi-turn data, on the other hand, teaches the model how to solve tasks—many real-world tasks involve back-and-forth. For instance, when given a query, a model may need to first clarify the user’s intent before addressing the task. After the model’s response, the user might provide corrections or additional information for the next step.
+- Data Quality: A small amount of high-quality data can outperform a large amount of noisy data, e.g., data that is irrelevant or inconsistent. The creators of the Yi model family found that 10K carefully crafted instructions are superior to hundreds of thousands of noisy instructions (Young et al., 2024). In general, data can be considered high-quality if it has the following six characteristics: relevant, aligned with task requirements, consistent, correctly formatted, unique, and compliant.
+- Data Coverage: Coverage requires sufficient data diversity, which is why many refer to this attribute as data diversity.
+- Data Quantity: Many things, other than data, can impact finetuning’s results, such as the choice of hyperparameters (e.g., the learning rate is too high or too low), data quality, poorly crafted prompts, etc. In the vast majority of cases, you should see improvements after finetuning with 50–100 examples.
+- Data Acquisition and annotation
+
+### Data Synthesis (~Augmentation)
+
+- Data augmentation creates new data from existing data (which is real). For example, given a real image of a cat, you can flip it to create a new image of the same cat.8
+
+- Data synthesis generates data to mimic the properties of real data. For example, you can simulate how a mouse moves through a web page to generate data for what bot movements would look like.
+
+- Traditional vs AI 
+
+### Model Distillation
+
+- Model distillation (also called knowledge distillation) is a method in which a small model (student) is trained to mimic a larger model (teacher) (Hinton et al., 2015). The knowledge of the big model is distilled into the small model, hence the term distillation.
+
+### Data Processing
+
+- Inspect Data
+- Deduplicate data
+- Clean and Filter Data
+- Format Data
+
+## Chapter 9: Inference Optimization
+
+- Up until now, the book has discussed various techniques for making models better. This chapter focuses on making them faster and cheaper.
+- Inference optimization can be done at the model, hardware, and service levels. At the model level, you can reduce a trained model’s size or develop more efficient architectures, such as one without the computation bottlenecks in the attention mechanism often used in transformer models. At the hardware level, you can design more powerful hardware.
+
+### Understanding IO
+
+#### Overview
+
+- In production, the component that runs model inference is called an inference server. It hosts the available models and has access to the necessary hardware. Based on requests from applications (e.g., user prompts), it allocates resources to execute the appropriate models and returns the responses to users. An inference server is part of a broader inference service, which is also responsible for receiving, routing, and possibly preprocessing requests before they reach the inference server.
+  
+#### Inference Performance metrics
+
+- Latency, TTFT, TPOT
+- Throughput and goodput
+- Utilization, MFU, and MBU
+
+#### AI Accelerators
+
+- An accelerator is a chip designed to accelerate a specific type of computational workload. An AI accelerator is designed for AI workloads. The dominant type of AI accelerator is GPUs, and the biggest economic driver during the AI boom in the early 2020s is undoubtedly NVIDIA.
+  
+- GPU v CPU
+- Computational capabilities
+- Memory size & Bandwidth
+- Power consumption
+
+#### Inference Optimization
+
+- Model Optimization
+- Inference Service Optimization
+
+## Chapter 10: AI Architecture and User Feedback
+
+### AI Architecture
+
+- Step 1: Enhance Context
+- Step 2: Put Guardrails
+- Step 3: Add Model Router Gateway
+- Step 4: Reduce Latency with Caches
+- Step 5: Add Agent Patterns
+- Monitoring and Observability
+- AI Pipeline Orchestration
+
+### User Feedback
+
+- Extracting conversational feedback
+- Design
+- Limitations
+
+
 
 ## Fun Facts
 
