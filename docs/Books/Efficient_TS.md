@@ -44,4 +44,54 @@
 * Hides type design
 * Undermines confidence on the type sys
 
-## Chapter 2: TS type sys
+## Chapter 2: TS type Sys
+
+### Item6: use IDE to explore Type Sys
+
+* `tsc` compiler and `tsserver` standalone server 
+* widening (#Item20) narrowing (#Item22)
+
+### Item7: Think of types as sets of values
+
+* correspondence between TypeScript terms and terms from set theory.
+* TypeScript types form intersecting sets (a Venn diagram) rather than a strict hierarchy. Two types can overlap without either being a subtype of the other.
+* Disclaimer: these are relationships, not TypeScript code!
+  
+    ```js
+    keyof (A&B) = (keyof A) | (keyof B)
+    keyof (A|B) = (keyof A) & (keyof B)
+    ```
+    If you can build an intuition for why these equations hold, you’ll have come a long way toward understanding TypeScript’s type system!
+
+* `never` bottom type vs `unknown` top type
+* types are sets of values and the things you can do with them
+
+### Item8: Symbol is Type Space vs Value Space
+
+* Know how to tell whether you’re in type space or value space while reading a TypeScript expression. Use the TypeScript playground to build an intuition for this.
+
+* Every value has a static type, but this is only accessible in type space. Type space constructs such as type and interface are erased and are not accessible in value space.
+
+* Some constructs, such as class or enum, introduce both a type and a value.
+
+* typeof, this, and many other operators and keywords have different meanings in type space and value space.
+
+### Item9: Prefer Type Annotations to Type Assertions
+
+* Prefer type annotations (: Type) to type assertions (as Type).
+
+* Know how to annotate the return type of an arrow function.
+
+* Use type assertions and non-null assertions only when you know something about types that TypeScript does not.
+
+* When you use a type assertion, include a comment explaining why it’s valid.
+
+### Item10: Avoid Object wrapper types
+
+* `String, Number, Boolean, Symbol, BigInt` vs `string, number, boolean, symbol, bigInt`
+
+### Item11: Excess Property Checking vs Type Checking
+
+* Excess property checking does not happen when you use a type assertion
+* A “weak type” is an object type with only optional properties. For these types, assignability checks require at least one matching property.
+
