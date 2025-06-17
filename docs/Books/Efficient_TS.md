@@ -95,3 +95,38 @@
 * Excess property checking does not happen when you use a type assertion
 * A “weak type” is an object type with only optional properties. For these types, assignability checks require at least one matching property.
 
+### Item12: Apply types to entire Fn expressions
+
+* Use typeof fn to match the signature of another function, or Parameters and a rest parameter if you need to change the return type.
+
+### Item13: type vs interface
+
+* Understand the differences and similarities between type and interface. Know how to write the same types using either syntax. Be aware of declaration merging for interface and type inlining for type. For projects without an established style, prefer interface to type for object types.
+
+### Item14: use readonly
+
+### **Item 15:** Use Type operations and generic types to avoid repeating yourself
+
+* Mapped types: `type Pick<T, K> = { [k in K]: T[k] };`
+* `[k in keyof Options]` = Partials `Partial<Options>`
+* You can include an as clause in them to rename the keys. There are many uses for this, but one is to invert the keys and values in a mapping: `type LongToShort = { [k in keyof ShortToLong as ShortToLong[k]]: k };`
+* If the index clause in your mapped type is of the form K in keyof T or a few variants on it, then TypeScript treats it as a **“homomorphic”** mapped type. 
+* The canonical use case for typeof is if you have a single value that you’d like to be the source of truth for a type (perhaps it’s some kind of schema or API specification). By making the value the source of truth, you avoid duplication in defining the type.
+* `ReturnType<typeof getUserInfo>`
+
+### Item16: Prefer more precise alternatives to Index Signatures
+
+* Index signature: `type Rocket = {[property: string]: string};`
+* What should you use index signatures for? Historically, they were the best way to model truly dynamic data.
+* use Map: `Map<string, string>[]`
+* While this may feel tedious, it does ensure that your data actually has the shape you expect. 
+* This pattern of doing data validation on a broad type (Map<string, string>) to get a more specific one (Rocket) is common in TypeScript.
+* Maps work around some famous gotchas involving the prototype chain.
+* If the problem with using an index signature is that string is too broad, then you can use a `Record`. 
+* Record is a built-in wrapper around a mapped type (Item 15).
+
+### Item17: Avoid numeric index signatures
+
+* JavaScript does not have a notion of “hashable” objects like you find in Python or Java.
+* In particular, numbers cannot be used as keys. If you try to use a number as a property name, the JavaScript runtime will convert it to a string
+* TypeScript models this by allowing numeric keys and distinguishing between these and strings. This is purely a fiction—string keys are accepted at runtime as the ECMAScript standard dictates that they must—but it is a helpful one that can catch mistakes:
