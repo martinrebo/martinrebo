@@ -130,3 +130,14 @@
 * JavaScript does not have a notion of “hashable” objects like you find in Python or Java.
 * In particular, numbers cannot be used as keys. If you try to use a number as a property name, the JavaScript runtime will convert it to a string
 * TypeScript models this by allowing numeric keys and distinguishing between these and strings. This is purely a fiction—string keys are accepted at runtime as the ECMAScript standard dictates that they must—but it is a helpful one that can catch mistakes:
+
+### Chapter 3: Type inference and control flow Analysis
+
+* In most languages, a variable has a type and it never changes. TypeScript is a bit different. A variable has a type at a location in your code. The process by which its type changes due to surrounding code is known as control flow analysis.
+
+### Item18: Avoid cluttering with Inferable types
+
+* Object literals for excess property checking
+* function has multiple return statements, if it’s part of a public API, or if you want to use a named return type
+  
+
