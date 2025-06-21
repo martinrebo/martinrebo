@@ -144,10 +144,12 @@
 
 * Union types are harder to work with than simple types like string or number because you usually have to check what they are before you do anything with them.
 
-### Iten20: Understand how a variable get its type
+### Item20: Understand how a variable get its type
 
 * `satisfies Record<string, Point>` This is an improvement over a const assertion because it will report the error where you define the object, rather than where you use it.
 
 * Understand how TypeScript infers a type from a literal by widening it.Familiarize yourself with the ways you can affect this behavior: const, type annotations, context, helper functions, as const, and satisfies.
+
+### Item21: Create Objects all at once
 
 
