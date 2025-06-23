@@ -172,3 +172,23 @@
 * We’re using two names for the same thing: This is a distinction without a difference (Item 41).
 * So TypeScript makes the pragmatic choice to assume the function does not invalidate its type refinements. Item 48 discusses other situations like this where TypeScript trades safety for convenience.
 * Be aware of how function calls can invalidate type refinements on properties. Trust refinements on local variables more than on properties.
+
+### Item24: Understand how context is used in type inference
+
+* string literals, tuple, object, callbacks, 
+
+### Item25: Understand evolving types
+
+* "evolving arrays"
+* Improved type inference is a good reason to prefer for-of loops to forEach loops in TypeScript.
+
+### Item26: Use Fn constructs and libraries
+
+* lodash and underscore
+
+### Item27: Use async
+
+### Item28: Uses classes and currying to create new inference sites
+
+* Prefer the currying approach if you’d like to create a local type alias.
+
