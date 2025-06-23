@@ -152,4 +152,23 @@
 
 ### Item21: Create Objects all at once
 
+* Prefer to build objects all at once rather than piecemeal.
+* Use multiple objects and object spread syntax ({...a, ...b}) to add properties in a type-safe way.
+* Know how to conditionally add properties to an object.
 
+### Item22: Understand Type Narrowing
+
+* Also known as Control Flow Analysis. But in TypeScript, a symbol has a type at a location. 
+* `if`, `instanceof`, property check, `isArray` 
+* falsy primitive values: null, empty string, 0
+* *tagged/discriminated union*. `switch` #item59
+* special function "user-defined type guard"
+* The issue is that TypeScript doesn’t understand the relationship between the has and get methods of a `Map`. It doesn’t know that checking has eliminates the possibility of undefined in a subsequent lookup with get
+* This pattern is common and can be written more concisely using the “nullish coalescing” operator (??)
+* Callbacks DON'T narrow
+
+### Item23: Be consistent in the use of aliases
+
+* We’re using two names for the same thing: This is a distinction without a difference (Item 41).
+* So TypeScript makes the pragmatic choice to assume the function does not invalidate its type refinements. Item 48 discusses other situations like this where TypeScript trades safety for convenience.
+* Be aware of how function calls can invalidate type refinements on properties. Trust refinements on local variables more than on properties.
