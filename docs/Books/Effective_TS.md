@@ -192,3 +192,82 @@
 
 * Prefer the currying approach if you’d like to create a local type alias.
 
+## Chapter 4: Type Design
+
+### Item29: Prefer types that represent valid states
+
+* state.error vs state.loading
+
+### **Item30**: Liberal in what you accept, strict in what you produce !!
+
+* Postel's Law - robustness principle. (TCP net protocol)
+* Input types tend to be broader than output types. Optional properties and union types are more common in parameter types than return types.
+* Avoid broad return types since these will be awkward for clients to use.
+* To reuse types between parameters and return types, introduce a canonical form (for return types) and a looser form (for parameters).
+* Use `Iterable<T>` instead of `T[]` if you only need to iterate over your function parameter
+
+### Item31: Don't repeat type info in doc
+### Item32: Avoid include null or undefined in type aliases
+
+* ...or write NullableVar
+* Avoid defining type aliases that include null or undefined.
+
+### Item33: Push null values to the perimeter 
+
+* Avoid designs in which one value being null or not null is implicitly related to another value being null or not null.
+* Push null values to the perimeter of your API by making larger objects either null or fully non-null. This will make code clearer both for human readers and for the type checker.
+* Consider creating a fully non-null class and constructing it when all values are available.
+
+### Item34: Prefer Unions of interfaces to interfaces with unions
+
+* Interfaces with multiple properties that are union types are often a mistake because they obscure the relationships between these properties.
+* Unions of interfaces are more precise and can be understood by TypeScript.
+* Use tagged unions to facilitate control flow analysis. `type Layer = FillLayer | LineLayer | PointLayer;`
+* Consider whether multiple optional properties could be grouped to more accurately model your data.
+
+### Item35: Precise alternatives to string types
+
+* Prefer keyof T to string for function parameters that are expected to be properties of an object.
+
+```ts
+function pluck<T>(record: T[], key: keyof T): T[keyof T][];
+
+function pluck<T, K extends keyof T>(records: T[], key: K): T[K][] {
+  return records.map(r => r[key]);
+}
+```
+
+### Item36: Distinct type for special values
+
+* Avoid special values that are assignable to regular values in a type. They will reduce TypeScript’s ability to find bugs in your code.
+* Prefer null or undefined as a special value instead of 0, -1, or "".
+* Consider using a tagged union rather than null or undefined if the meaning of those values isn’t clear.
+
+### Item37: Limit optional properties
+
+* Optional properties can prevent the type checker from finding bugs and can lead to repeated and possibly inconsistent code for filling in default values.
+* Think twice before adding an optional property to an interface. Consider whether you could make it required instead.
+* Consider creating distinct types for un-normalized input data and normalized data for use in your code.
+* Avoid a combinatorial explosion of options
+
+### Item38: Avoid repeated parameters of same type
+
+* Avoid writing functions that take consecutive parameters with the same TypeScript type.
+* Refactor functions that take many parameters to take fewer parameters with distinct types, or a single object parameter.
+
+### Item39: Prefer unifying types to modeling differences
+
+* camelCase vs snake_version (accept superficial inconsistency)
+
+### Item40: Prefer imprecise types to inacurate types
+
+* Avoid the uncanny valley of type safety: complex but inaccurate types are often worse than simpler, less precise types. If you cannot model a type accurately, do not model it inaccurately! Acknowledge the gaps using any or unknown.
+* Pay attention to error messages and autocomplete as you make typings increasingly precise. It’s not just about correctness: developer experience matters, too.
+* As your types grow more complex, your test suite for them should expand.
+
+
+### Item41: Name types with problem domain
+
+### Item42: Avoid types of anectdotal data
+
+* What if there’s no spec or official schema available? Then you’ll have to generate types from data. Tools like quicktype can help with this.
