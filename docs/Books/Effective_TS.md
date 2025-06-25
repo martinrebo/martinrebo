@@ -271,3 +271,49 @@ function pluck<T, K extends keyof T>(records: T[], key: K): T[K][] {
 ### Item42: Avoid types of anectdotal data
 
 * What if there’s no spec or official schema available? Then you’ll have to generate types from data. Tools like quicktype can help with this.
+
+## Chapter 5: Unsoundness and the any type
+
+* unsoundness: when a symbol’s static type does not match its runtime type. Even if you eliminate all the anys from your code, you may still fall into soundness traps.
+
+### Item43: Use narrowest scope for any
+
+* `as any` is preferable. `ts-expect-error` preferable over `ts-ignore`
+
+### Item44: prefer precise variants of any
+
+* `any[]`, `any[][]`,`{[key: string]: any} or Record<string, any>`, 
+* type `object`, Iterating over object types is particularly tricky in TypeScript. #item60
+* Avoid using any if you expect a function type
+* Rest parameters are perhaps the most common use of the any[] type.
+* `unknown[]` instead of any[]
+
+### Item 45: Hide unsafe type assertions
+
+* better approach would be to keep the type signature as it was and add an assertion in the function body
+* Another way to hide a type assertion is by providing a single overload of the function
+* Sometimes unsafe type assertions and any types are necessary or expedient. When you need to use one, hide it inside a function with a correct signature.
+* Don’t compromise a function’s type signature to fix type errors in the implementation.
+* Make sure you explain why your type assertions are valid, and unit test your code thoroughly.
+
+### Item 46: Use unknown instead of any
+
+* Understand the difference between {}, object, and unknown.
+
+### Item 47: Prefer type-safe aproaches to monkey patching
+
+* Adding properties to built-in objects at runtime is known as “monkey patching” and is particularly common with code that uses jQuery or D3
+
+### Item 48: Avoid Soundness Traps
+
+* any, type assertions, Object and array lookups, noUncheckedIndexedAccess, inaccurate type definitions, 
+* Bivariance in class hierarchies. 
+  *  Functions are covariant in their return types. Functions are contravariant in their parameter types.
+* TS inaccurate model of variance for objects and arrays
+* Fn calls don't invalidate refinements
+* Assignability and Optional properties
+
+### Item 49: Track your type coverage
+
+* type-coverage npm
+
