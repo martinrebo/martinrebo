@@ -317,3 +317,77 @@ function pluck<T, K extends keyof T>(records: T[], key: K): T[K][] {
 
 * type-coverage npm
 
+## Chapter 6: Generics and type-level programming
+
+### Item50: Think of Gens as Fn between types
+
+* Built-in `Partial<T>` equivalent to `type MyPartial<T> = {[K in keyof T]?: T[K]};`
+* Built-in `PropertyKey` alias for string | number | symbol (type level equivalent of as any)
+* Built-in `Pick<T,K>` equivalent to `type MyPick<T extends object, K extends keyof T> = {[P in K]: T[P]};`
+  * You can write TSDoc for generic types and the TypeScript language service will surface it in relevant situations, just as it would for functions. The type-level equivalent of @param is @template:1
+
+```ts
+
+/**
+ * Construct a new object type using a subset of the properties of another one
+ * (same as the built-in `Pick` type).
+ * @template T The original object type
+ * @template K The keys to pick, typically a union of string literal types.
+ */
+type MyPick<T extends object, K extends keyof T> = {
+  [P in K]: T[P]
+};
+```
+
+* TypeScript types are best thought of as sets of values (#Item7), so generic types inherently operate on sets. This is quite distinct from JavaScript functions where you know that each parameter will have a single value every time the function is called. In practice this means that you always need to think about how your generic type will behave with union types. Item 53 shows you how to do this.
+* Use extends to constrain the domain of type parameters, just as you’d use a type annotation to constrain a function parameter.
+* Choose type parameter names that increase the legibility of your code, and write TSDoc for them.
+* Think of generic functions and classes as conceptually defining generic types that are conducive to type inference.
+
+### Item51: Avoid unnecessary type parameters
+
+* Golden Rule of Generics”: Type Parameters Should Appear Twice. Type parameters are for relating the types of multiple values. If a type parameter is only used once in the function signature, it’s not relating anything.
+  * except fn parameters assingable to each other. Use single overload. 
+
+* Remember that a type parameter may appear in an inferred type.
+* Avoid “return-only generics.”
+* Unneeded type parameters can often be replaced with the unknown type.
+
+### Item52: Prefer conditional types to overload signatures
+
+* option is to provide multiple type declarations, also known as “overload signatures” (see Item 3 for a refresher).
+* While JavaScript only allows you to write one implementation of a function, TypeScript allows you to write any number of type signatures.
+* When you provide overload signatures, TypeScript processes them one by one until it finds a match. The error you’re seeing is a result of the last overload
+
+```ts
+declare function double<T extends string | number>(
+  x: T
+): T extends string ? string : number;
+```
+
+### Item53: Know how to control the distribution of unions over conditional types
+
+* How can we prevent distribution? Unions only distribute over conditional types if the condition is a bare type (T extends ...). So to prevent distribution, we need to complicate the expression a bit. The standard way to do this is to wrap T in a one-element tuple type, [T]:
+
+```ts
+type Comparable<T> =
+    [T] extends [Date] ? Date | number:
+    [T] extends [number] ? number :
+    [T] extends [string] ? string :
+    never;
+
+```
+
+* Using an accumulator is a common technique with recursive generic types because it can improve their performance. Item 57 will explain how.
+
+```ts
+type NTuple<T, N extends number> =
+    N extends number
+    ? NTupleHelp<T, N, []>
+    : never;
+```
+
+* Conditional types have two other surprising behaviors that you should be aware of when they distribute over the boolean and never types.
+
+### Item54: Use Template literal types to model DSLs and relationships btw strings
+
