@@ -391,3 +391,6 @@ type NTuple<T, N extends number> =
 
 ### Item54: Use Template literal types to model DSLs and relationships btw strings
 
+* Use template literal types to model structured subsets of string types and domain-specific languages (DSLs).
+* Combine template literal types with mapped and conditional types to capture nuanced relationships between types.
+* Take care to avoid crossing the line into inaccurate types. Strive for uses of template literal types that improve developer experience without requiring knowledge of fancy language features.
