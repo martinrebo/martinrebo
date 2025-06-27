@@ -394,3 +394,7 @@ type NTuple<T, N extends number> =
 * Use template literal types to model structured subsets of string types and domain-specific languages (DSLs).
 * Combine template literal types with mapped and conditional types to capture nuanced relationships between types.
 * Take care to avoid crossing the line into inaccurate types. Strive for uses of template literal types that improve developer experience without requiring knowledge of fancy language features.
+
+### Item55: Write tests for your types
+
+For code on DefinitelyTyped, use dtslint. For your own code, use vitest, expect-type, or the Type Challenges approach. If you want to test type display, use eslint-plugin-expect-type.
