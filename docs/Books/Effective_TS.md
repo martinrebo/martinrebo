@@ -435,3 +435,28 @@ type PartiallyPartial<T extends object, K extends keyof T> =
   * `Exclude<keyof T, never>` to inline keyof expressions
   * `unknown & T` or `{} & T` to inline object types
 
+### Item57: Prefer Tail Recursive Generic Types
+
+* If the last thing a function does is call itself recursively and return that value, it can give up its space on the stack: its work is done and it doesn’t need it any more. This is known as Tail Call Optimization (TCO) and functions with this form are called tail recursive.
+
+```ts
+
+type ToSnake<T extends string, Acc extends string = ""> =
+  string extends T
+  ? string  // We want ToSnake<string> = string
+  : T extends `${infer First}${infer Rest}`
+  ? ToSnake<
+      Rest,
+      First extends Uppercase<First>
+      ? `${Acc}_${Lowercase<First>}`
+      : `${Acc}${First}`
+    >
+  : Acc;
+
+  ```
+
+### Item58: Consider Codegen to Complex types
+
+* For our SQL queries, one option is to use the PgTyped library. It finds appropriately-tagged SQL queries in your TypeScript, examines them against a live database, and writes out a type declaration file with the input and output types. pgtyped command would need to be rerun whenever a query changes or the database schema changes.
+* Don’t like the snake_case type names? Just pipe them through sed or your text processing tool of choice.
+* Items 42 and 74 explore other ways in which codegen can be used to improve type safety and reduce maintenance overhead.

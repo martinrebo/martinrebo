@@ -40,3 +40,20 @@ function getElementFixed(elOrId: string|HTMLElement|null): HTMLElement {
   return el;
   //     ^? const el: HTMLElement
 }
+
+// #Item57: Prefer Tail-recursive Generic types
+
+function sum(nums: readonly number[], acc=0): number {
+  if (nums.length === 0) {
+    return acc;
+  }
+  return sum(nums.slice(1), nums[0] + acc);
+}
+
+const arr = Array(7875).fill(1);
+
+console.log(sum(arr));
+
+// Although ES2015 requires that JavaScript engines support Tail Call Optimization, at the time of this writing only Safari does.
+//  This means that to see TCO in action,
+//  you need to use a runtime like bun that’s based on JavaScriptCore (Safari) rather than one like Node that’s based on V8 (Chrome)
