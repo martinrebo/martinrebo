@@ -398,3 +398,40 @@ type NTuple<T, N extends number> =
 ### Item55: Write tests for your types
 
 For code on DefinitelyTyped, use dtslint. For your own code, use vitest, expect-type, or the Type Challenges approach. If you want to test type display, use eslint-plugin-expect-type.
+
+### Item56: Pay attention how types display
+
+* `type Resolve<T> = T extends Function ? T : {[K in keyof T]: T[K]};`
+
+```ts
+// Good implementation, bad display
+type PartiallyPartial<T, K extends keyof T> =
+  Partial<Pick<T, K>> & Omit<T, K>;
+
+// widespread trick to flatten display (also call Simplify, NOP, NOOP, MergeInsertions)
+type Resolve<T> = T extends Function ? T : {[K in keyof T]: T[K]};
+
+type PartiallyPartial<T, K extends keyof T> =
+  Resolve<Partial<Pick<T, K>> & Omit<T, K>>;
+
+// How Resolve works? Homomorphic mapped type: 
+type ObjIdentity<T> = {[K in keyof T]: T[K]};
+// For functions to work, we need conditional type guarding 
+
+```
+
+* Concise type: 
+
+```ts
+type PartiallyPartial<T extends object, K extends keyof T> =
+  [K] extends [never]
+  ? T  // special case
+  : T extends unknown  // extra conditional to preserve distribution over unions
+  ? Resolve<Partial<Pick<T, K>> & Omit<T, K>>
+  : never;
+```
+
+* Common techniques that can be replace by Resolve
+  * `Exclude<keyof T, never>` to inline keyof expressions
+  * `unknown & T` or `{} & T` to inline object types
+
