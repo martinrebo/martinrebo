@@ -490,3 +490,168 @@ throw new Error(`Missed a case: ${shape}`);
   * By default, `${a},${b}` would have a type of string. `${Play},${Play}` is a subtype of string consisting of the nine possible pairs of plays separated by a comma. We can apply the usual exhaustiveness checking trick to make sure we’ve covered all nine.
 * The typescript-eslint rule switch-exhaustiveness-check can also be used for exhaustiveness checking. Whereas assertUnreachable is opt-in, the linter rule is opt-out
 
+# Item60: Know how to operate over objects
+
+```ts
+for (const kStr in obj) {
+  const k = kStr as keyof typeof obj;
+  //    ^? const k: "one" | "two" | "three"
+  const v = obj[k];  // OK
+}
+```
+* *Object.entries* excludes inherited properties and lets you iterate over both simultaneously
+  
+```ts
+function foo(abc: ABC) {
+  for (const [k, v] of Object.entries(abc)) {
+    //        ^? const k: string
+    console.log(v);
+    //          ^? const v: any
+  }
+}
+
+```
+
+* Another reason that TypeScript infers string in for-in loops is prototype pollution
+* A safe way to get more precise types is to explicitly list the keys you’re interested in:
+
+```ts
+function foo(abc: ABC) {
+  const keys = ['a', 'b', 'c'] as const;
+  for (const k of keys) {
+    //       ^? const k: "a" | "b" | "c"
+    const v = abc[k];
+    //    ^? const v: string | number
+  }
+}
+```
+
+* While iterating over objects comes with many hazards, iterating over a Map does not. #item16 replace object for map
+
+# Item61: Use Record Types to keep values in sync
+
+* Recognize the fail open versus fail closed dilemma.
+* Use Record types to keep related values and types synchronized.
+* The key is to use a Record type with the right set of keys. It’s important that we used an object with boolean values here:
+
+```ts
+const REQUIRES_UPDATE: Record<keyof ScatterProps, boolean> = {
+  xs: true,
+  ys: true,
+  xRange: true,
+  yRange: true,
+  color: true,
+  onClick: false,
+};
+
+function shouldUpdate(
+  oldProps: ScatterProps,
+  newProps: ScatterProps
+) {
+  for (const kStr in oldProps) {
+    const k = kStr as keyof ScatterProps;
+    if (oldProps[k] !== newProps[k] && REQUIRES_UPDATE[k]) {
+      return true;
+    }
+  }
+  return false;
+}
+```
+
+# Item62: use Rest parameters and tuple types to model variadic functions
+
+* we want the function to take a variable number of arguments, depending on an inferred type.
+* This is the most general technique for modeling variadic functions. You could also use overload signatures to achieve a similar effect, but this would result in code duplication and, as Item 52 explained, conditional types handle unions more naturally than overloads.
+* Sometimes the number or type of parameters to a function depends on a TypeScript type. When this happens, you can model it using rest parameters with a tuple type.
+
+```ts
+interface RouteQueryParams {
+  '/': null,
+  '/search': { query: string; language?: string; }
+  // ...
+}
+
+function buildURL<Path extends keyof RouteQueryParams>(
+  route: Path,
+  ...args: (
+      RouteQueryParams[Path] extends null
+      ? []
+      : [params: RouteQueryParams[Path]]
+    )
+) {
+  const params = args ? args[0] : null;
+  return route + (params ? `?${new URLSearchParams(params)}` : '');
+}
+
+```
+
+# Item63: Use optional never properties to model exlusive Or
+
+* The standard trick is to use an optional never type in your interface to disallow a property:
+
+```ts
+
+interface OnlyThingOne {
+  shirtColor: string;
+  hairColor?: never;
+}
+interface OnlyThingTwo {
+  hairColor: string;
+  shirtColor?: never;
+}
+type ExclusiveThing = OnlyThingOne | OnlyThingTwo;
+
+```
+
+* You can also use a tagged union (Item 34) to achieve an exclusive or:
+
+```ts 
+interface ThingOneTag {
+  type: 'one';
+  shirtColor: string;
+}
+interface ThingTwoTag {
+  type: 'two';
+  hairColor: string;
+}
+type Thing = ThingOneTag | ThingTwoTag;
+
+```
+
+* Rather than adding optional never properties by hand, it’s possible to define a generic exclusive or (XOR) helper:
+
+```ts
+type XOR<T1, T2> =
+    (T1 & {[k in Exclude<keyof T2, keyof T1>]?: never}) |
+    (T2 & {[k in Exclude<keyof T1, keyof T2>]?: never});
+```
+
+### Item64: Consider Brands for Nominal Typing
+
+* This is known as nominal typing, as opposed to TypeScript’s usual structural typing. With nominal typing, a value is a Vector2D because you say it is, not because it has the right shape.
+* You can’t construct an object that is a string and has a _brand property. This is purely a game with the type system. (If you think you can assign properties to a string, #Item10 will explain why you’re mistaken.)
+
+```ts
+type AbsolutePath = string & {_brand: 'abs'};
+
+function listAbsolutePath(path: AbsolutePath) {
+  // ...
+}
+function isAbsolutePath(path: string): path is AbsolutePath {
+  return path.startsWith('/');
+}
+
+type Meters = number & {_brand: 'meters'};
+type Seconds = number & {_brand: 'seconds'};
+
+// another common technique
+declare const brand: unique symbol;
+export type Meters = number & {[brand]: 'meters'};
+
+// binary search sorterd list
+type SortedList<T> = T[] & {_brand: 'sorted'};
+
+```
+
+* Be familiar with the various techniques for branding: properties on object types, string-based enums, private fields, and unique symbols.
+
