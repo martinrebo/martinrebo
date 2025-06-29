@@ -460,3 +460,33 @@ type ToSnake<T extends string, Acc extends string = ""> =
 * For our SQL queries, one option is to use the PgTyped library. It finds appropriately-tagged SQL queries in your TypeScript, examines them against a live database, and writes out a type declaration file with the input and output types. pgtyped command would need to be rerun whenever a query changes or the database schema changes.
 * Don’t like the snake_case type names? Just pipe them through sed or your text processing tool of choice.
 * Items 42 and 74 explore other ways in which codegen can be used to improve type safety and reduce maintenance overhead.
+
+
+## Chapter 7: Typescript Recipes
+
+### Item59: Use never types to perform exhaustiveness checking
+
+* Tips and tricks Stefan Baumgartner’s TypeScript Cookbook.
+* omision error of switch of if case
+
+```ts
+// switch default case
+function assertUnreachable(value: never): never {
+  throw new Error(`Missed a case! ${value}`);
+}
+
+// switch default case
+ const exhaustiveCheck: never = shape;
+ throw new Error(`Missed a case: ${exhaustiveCheck}`);
+
+ // switch default case
+shape satisfies never
+throw new Error(`Missed a case: ${shape}`);
+
+```
+
+* For switch with returns Add Function return value
+* For pairs checking ``` const pair = `${a},${b}` as `${Play},${Play}`; ``` default: assertUnreachable(pair)
+  * By default, `${a},${b}` would have a type of string. `${Play},${Play}` is a subtype of string consisting of the nine possible pairs of plays separated by a comma. We can apply the usual exhaustiveness checking trick to make sure we’ve covered all nine.
+* The typescript-eslint rule switch-exhaustiveness-check can also be used for exhaustiveness checking. Whereas assertUnreachable is opt-in, the linter rule is opt-out
+
