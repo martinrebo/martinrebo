@@ -2,8 +2,6 @@
 
 Notes on Courses from Deeplearning.ai
 
-* [pip](https://pip.pypa.io/en/stable/cli/pip_install/)
-
 ## OS models with HugginFace
 
 * Sylabus:
@@ -67,7 +65,7 @@ Notes on Courses from Deeplearning.ai
 * [pip install -U wikipedia](https://pypi.org/project/wikipedia/)
   * Note: this library was designed for ease of use and simplicity, not for advanced use. If you plan on doing serious scraping or automated requests, please use Pywikipediabot (or one of the other more advanced Python MediaWiki API wrappers), which has a larger API, rate limiting, and other features so we can be considerate of the MediaWiki infrastructure.
 
-### Serverless LLM Apps Amazon Bedrock
+## Serverless LLM Apps Amazon Bedrock
 
 * Sylabus
   1. Amazon Bedrock generation
@@ -81,3 +79,74 @@ Notes on Courses from Deeplearning.ai
   * AWS SDK [Bedrock docs](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/bedrock.html)
 * [pip install Jinja2](https://pypi.org/project/Jinja2/)
   * Jinja is a fast, expressive, extensible templating engine. Special placeholders in the template allow writing code similar to Python syntax. Then the template is passed data to render the final document.
+
+## ChatGPT Prompt Engineering for Devs
+
+* Sylabus:
+  1. Guidelines
+  2. Iterative
+  3. Summarizing
+  4. Inferring
+  5. Transforming
+  6. Expanding
+  7. Chatbot
+
+#### Guidelines:
+  * 1. Write Clear and precise instructions
+  * 2. Get the model time to think
+
+* Tactics for Write clear and precise intructions 
+  * Tactic 1: Use delimiters to clearly indicate distinct parts of the input
+    * Delimiters can be anything like: ```, """, < >, <tag> </tag>
+  * Tactic 2: Ask for a structured output
+  * Ask the model to check whether conditions are satisfied
+  * Tactic 4: "Few-shot" promptin
+* Tactics for Give the model time to think
+  * Tactic 1: Specify the steps required to complete a task, as for output format
+  * Tactic 2: Instruct to work out its own solution before rushing to conclusion
+* Model Limitations
+  * Hallucinations
+    * First find relevant information, then answer the question. 
+
+* pip install Redlines: Diff text
+* pip install panel
+  * The powerful data exploration & web app framework for Python.
+
+
+## Javascript RAG Web Apps with Llamaindex
+
+* Sylabus
+  * into RAG
+  * Full-stack web app
+  * Advanced quereis with agents
+  * Prod-ready techniques
+
+* Create Query Engine
+  * This convenience function combines several components:
+    * Retriever
+    * Postprocessing
+    * Synthesizer
+
+## Leta - LLMs as OS: Agent Memory
+
+* Sylabus
+  1. Editable Memory
+  2. Understanding MemGPT
+  3. Building Agents with Memory
+  4. Programming Agent Memory
+  5. Agentic RAG and External Memory
+  6. Multi-agent orchestration
+
+* LLM context window
+  * LLM's have a context window (the set of tokens that go into the model) that is limited in size. That means we need to be smart about what we place into the context. Usually the context window for an agent is strucuted in a certain way. Depending on the agent framework, the structure will vary, but usually the context window contains:
+    - A system prompt instructing the agent's behavior
+    - A conservation history of previous conversations
+  Because context windows are limited, only some of the conversation history can be included. Some frameworks will also place a recursive summary in the context, or retrieve relevant messages from an external database and also place them into the context. In MemGPT, we also reserver additional sections of the context for:
+    - A recursive summary of all previous conversations
+    - A core memory section that is read-writeable by the agent
+
+* Understanding MemGPT
+  * self-editing memory + inner thoughts + tool outputs + looping via heartbeats
+  * autonomous and self-improving
+  * Agent sate: Memories + tools + messages (MemGPT database)
+  * Context compilation: 
