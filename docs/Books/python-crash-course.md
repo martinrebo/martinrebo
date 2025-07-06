@@ -9,3 +9,8 @@ title: python crash course
 * List Comprehensions `squares = [value**2 for value in range(1, 11)]`
 * Styles: PEP8
 
+## Chapter 5: If statements
+## Chapter 6: Dictionaries
+
+
+

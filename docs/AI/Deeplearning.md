@@ -2,7 +2,7 @@
 
 Notes on Courses from Deeplearning.ai
 
-## OS models with HugginFace
+## OS models with HF
 
 * Sylabus:
   1. Selecting Models
@@ -92,8 +92,8 @@ Notes on Courses from Deeplearning.ai
   7. Chatbot
 
 #### Guidelines:
-  * 1. Write Clear and precise instructions
-  * 2. Get the model time to think
+* 1. Write Clear and precise instructions
+* 2. Get the model time to think
 
 * Tactics for Write clear and precise intructions 
   * Tactic 1: Use delimiters to clearly indicate distinct parts of the input
@@ -150,3 +150,133 @@ Notes on Courses from Deeplearning.ai
   * autonomous and self-improving
   * Agent sate: Memories + tools + messages (MemGPT database)
   * Context compilation: 
+
+## Building Gen Ai with Gradio
+
+* Syllabus
+  * NLP Task interface
+  * Image Captioning app
+  * Image generation app
+  * Describe and generate game
+  * Chat with any LLM
+
+## Agent Communication Protocol (WIP)
+
+Syllabus
+
+* Why Agent Communication
+* ACP Core Principles
+* Building a RAG agent with crewAi
+* Warting the RAG agent into an ACP server
+* Calling ACP agent using the client
+* Wrapping a smolagents into ACP. 
+
+## Building Coding Agents with HG smolagents
+
+Syllabus
+
+  1. A brief history of agents
+  2. Intro to coding agents
+  3. Secure code execution
+  4. Monitoring and evaluating your agents
+  5. Build a Deep-Research agent
+
+Notes
+
+* Range of Agency Levels
+  * simple processor, router, tool call, multi-step, multi-agent
+  * [GAIA task](https://ai.meta.com/research/publications/gaia-a-benchmark-for-general-ai-assistants/)
+* Introduction to code agents
+  * Paper: Code Agents Perform Better: Xingyao Wang et al. 
+* Secure Code Execution
+  * LLM error - Supply chain attack - Prompt injection - 
+* Monitoring and evaluationg
+  * [pip install arize-phoenix-otel](https://pypi.org/project/arize-phoenix-otel/)
+  * Provides a lightweight wrapper around OpenTelemetry primitives with Phoenix-aware defaults. Phoenix Otel also gives you acces to tracing decorators for common GenAI patterns.
+* Build a Deep-Research Agent
+  * Tavily: Connect Your LLM to the Web Empowering your AI applications with real-time accurate search results tailored for LLMs and RAG.
+
+## Building toward Computer use with Anthropic
+
+Syllabus
+
+* Overview
+* Working with API
+* Multimodal Request
+* Real World prompting
+* Prompt caching
+* Tool use
+
+Notes
+* Regular expressions [import re](https://docs.python.org/3/library/re.html)
+* n-shot prompting (<examples>)
+* 
+  
+
+
+## MCP: Build rich-context ai apps with Anthropic
+
+Syllabus: 
+  * MCP architecture
+  * Chatbot example
+  * Create MCP server + client
+  * Connecting MCP chatbot to reference servers
+  * Adding Prompt and resource feats
+  * Config servers for Claude desktop
+  * Create and deploy remote servers
+ Notes:
+  * https://arxiv.org/ 
+  * https://render.com/
+  * https://modelcontextprotocol.io/
+
+## LangChain Chat with your data (RAG)
+
+Syllabus:
+
+* Document Loading
+* Document Splitting
+* VectorStores and Embdding
+* Retrieval
+* Question Answering
+* Chat
+
+Notes: 
+
+* LangChain Components: Prompts, Models, Indexes, Chaings, Agents
+* RAG: Chat with your data
+* Document Loaders: (8 types)
+  * pip install pypdf 
+  * Loaders: deal with the specifics of accessing and coverting data
+  * Accesing: Websites, youtube, db, arxiv..
+  * converting: pdf, htlm, json, word...
+  *  ! pip install yt_dlp ! pip install pydub
+* Document splitting
+  * Semantic relevant chunks: size and overlap
+  * Types of splitters langchain.text_splitter
+    * char, markdownHead, Token, SentenceTransformerToken, RecursiveCharacterTextSplitter, Language, NLTKText (Natual Language), Spacy
+* Vectorstores and Embeddings
+  * RAG: Load ⇒ split ⇒ storage ⇒ retrieval ⇒ output
+  * numpy: It is a Python library that provides a multidimensional array object, various derived objects (such as masked arrays and matrices), and an assortment of routines for fast operations on arrays, including mathematical, logical, shape manipulation, sorting, selecting, I/O, discrete Fourier transforms, basic linear algebra, basic statistical operations, random simulation and much more.
+  * `numpy.dot(a, b, out=None)` Dot product of two arrays.
+  *  Chroma vector store (in memory)
+     *  `docs = vectordb.similarity_search(question,k=3)`
+* Retrieval
+  * Types
+    * Semantic similarity
+    * Maximum Marginal Relevance (MMR) algorithm
+      *  fetch_k - most diverse
+    * Self Query - LLM Aided
+      *  metadate Query parse (Filter + search term)
+    * Compression:
+     * shrinkin the responses to only the relevant info.
+   * TF-IDF or SVM 
+* `pip lark`: Lark is a modern general-purpose parsing library for Python. With Lark, you can parse any context-free grammar, efficiently, with very little code.
+* Q/A
+  * Context window
+    * Stuff vs Map_reduce vs Refine vs Map_rerank
+* Chat
+  * Recall the overall workflow for retrieval augmented generation (RAG)
+  * LangSmith (previously LangChain plus)
+  * https://param.holoviz.org/
+  * https://panel.holoviz.org/
+  * 

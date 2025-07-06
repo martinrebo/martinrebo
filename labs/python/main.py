@@ -12,3 +12,8 @@ sentence_variable = "variable string"
 nexus = f"{sentence} {sentence_variable}"
 print("\tPython" f"this is a nan {sentence}")
 print("Languages:\nPython\nC\nJavaScript")
+
+def add(a, b):
+    """Returns the sum of a and b."""
+    return a + b
+    
