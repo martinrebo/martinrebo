@@ -1,3 +1,6 @@
 {
-    "workbench.colorTheme": "Monokai"
+    "workbench.colorTheme": "Minimal Kiwi",
+    "workbench.iconTheme": "fira-code-material-minimal",
+    "editor.fontFamily": "fira-code-nerd, FiraCode Nerd Font, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true
 }

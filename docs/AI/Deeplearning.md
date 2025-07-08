@@ -279,4 +279,84 @@ Notes:
   * LangSmith (previously LangChain plus)
   * https://param.holoviz.org/
   * https://panel.holoviz.org/
+
+## Langchain: Fn, tools, agents 
+
+* ( October 2023 ) update June 2024
+* Use LangChain Expression Language (LCEL), a new syntax to compose and customize chains and agents faster.
+
+Sylabus:
+  * OpenAi Function Calling
+  * LangChain Expression Language (LCEL)
+  * OpenAi Function Calling in LangChain
+  * Tagging and Extraction
+  * Tools and routing
+  * Conversational Agent
+
+ Notes
+* OpenAi Function Calling
+  * OpenAi finetune models to: Accept arguments to pass functions
+  * return JSON fn with appropiate parameters
+* LCEL
+  * composes chains of components
+  * input types -> Required methods -> Output types
+  * Linux pipe syntax
+  * Interface
+    * Components implement "Runnable" protocol
+    * Common methods: `ainvoke, astream, abatch`
+    * common properties: input_schema, output_schema
+    * common i/o
+  * Benefits
+    * Async Batch and streaming
+    * Fallbacks, Parallelism, Logging.
+  * `pip install pydantic` Data validation using Python type hints
+  * chain = prompt | model | output_parser
+* OpenAi Function calling in LangChain
+  * pydantic: works with python type annotations used at runtime. Serialize json, dicts, 
+* Tagging and extraction
+  * doc tag https://lilianweng.github.io
+
+  ```python 
+  def flatten(matrix):
+  """ put elements on the same array """
+  flat_list = []
+  for row in matrix:
+      flat_list += row
+  return flat_list
+  ```
+  * `from langchain.schema.runnable import RunnableLambda`
+* Tools and Routing
+  * Functions and services an LLM can utilize to exten its capabilieties are named tools in LangChain: "Search, Math, SQL, et..."
+  * Routing is selecting from multiple tools. 
+  * `@tool` decorators. `from langchain.agents import tool`
+* Agents Basics
+  * Agent: combination of LLMs and code
+    * LLM reason about what steps to take and call for actions
+  * Agent Loop: Choose tool to use ⇒ Observe output ⇒ repeat until condition
+  * `from langchain.prompts import MessagesPlaceholder`
+    * action + observation pair
+    * agent_scratchpad
+
+## Build LLM Apps with LangChain.js
+
+Sylabus:
+  * Building Blocks
+  * Loading and preparing data
+  * VectorStores and embedings
+  * Q/A
+  * Conversational Q/A
+  * Shipping as a web API
+
+Notes: 
+  * `import { similarity } from "ml-distance";`
   * 
+
+## Collaborative writing and coding with openCanvas
+
+Syllabus
+
+  * Collaborative writing, coding
+  * Build a spaceship game
+  * create sql database from architecture image
+  * training the canvas
+

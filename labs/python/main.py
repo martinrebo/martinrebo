@@ -17,3 +17,8 @@ def add(a, b):
     """Returns the sum of a and b."""
     return a + b
     
+tool = {
+            "search_wikipedia": "hello_world_search_wikipedia", 
+            "get_current_temperature": "get_current_temperature",
+        }["search_wikipedia"] 
+print(tool)

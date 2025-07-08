@@ -54,6 +54,10 @@ const arr = Array(7875).fill(1);
 
 console.log(sum(arr));
 
+
+
 // Although ES2015 requires that JavaScript engines support Tail Call Optimization, at the time of this writing only Safari does.
 //  This means that to see TCO in action,
 //  you need to use a runtime like bun that’s based on JavaScriptCore (Safari) rather than one like Node that’s based on V8 (Chrome)
+
+()=> () // Ligatures font
