@@ -490,7 +490,7 @@ throw new Error(`Missed a case: ${shape}`);
   * By default, `${a},${b}` would have a type of string. `${Play},${Play}` is a subtype of string consisting of the nine possible pairs of plays separated by a comma. We can apply the usual exhaustiveness checking trick to make sure we’ve covered all nine.
 * The typescript-eslint rule switch-exhaustiveness-check can also be used for exhaustiveness checking. Whereas assertUnreachable is opt-in, the linter rule is opt-out
 
-# Item60: Know how to operate over objects
+### Item60: Know how to operate over objects
 
 ```ts
 for (const kStr in obj) {
@@ -528,7 +528,7 @@ function foo(abc: ABC) {
 
 * While iterating over objects comes with many hazards, iterating over a Map does not. #item16 replace object for map
 
-# Item61: Use Record Types to keep values in sync
+### Item61: Use Record Types to keep values in sync
 
 * Recognize the fail open versus fail closed dilemma.
 * Use Record types to keep related values and types synchronized.
@@ -558,7 +558,7 @@ function shouldUpdate(
 }
 ```
 
-# Item62: use Rest parameters and tuple types to model variadic functions
+### Item62: use Rest parameters and tuple types to model variadic functions
 
 * we want the function to take a variable number of arguments, depending on an inferred type.
 * This is the most general technique for modeling variadic functions. You could also use overload signatures to achieve a similar effect, but this would result in code duplication and, as Item 52 explained, conditional types handle unions more naturally than overloads.
@@ -585,7 +585,7 @@ function buildURL<Path extends keyof RouteQueryParams>(
 
 ```
 
-# Item63: Use optional never properties to model exlusive Or
+### Item63: Use optional never properties to model exlusive Or
 
 * The standard trick is to use an optional never type in your interface to disallow a property:
 
@@ -654,4 +654,120 @@ type SortedList<T> = T[] & {_brand: 'sorted'};
 ```
 
 * Be familiar with the various techniques for branding: properties on object types, string-based enums, private fields, and unique symbols.
+  
+## Chapter 8: Type Declarations and @types
 
+### Item65: Put the TS and @types in devDependencies
+
+### Item66: Understand the three versions involved in type declarations
+
+* version package + version of type declarations + TS version
+
+### Item67: Export all Types that appear in public APIS
+
+* Export types that appear in any form in any public method. Your users will be able to extract them anyway, so you may as well make it easy for them.
+
+### Item68: Use TSDoc for API comments
+
+```ts
+**
+ * Generate a greeting.
+ * @param name Name of the person to greet
+ * @param title The person's title
+ * @returns A greeting formatted for human consumption.
+ */
+function greetFullTSDoc(name: string, title: string) {
+  return `Hello ${title} ${name}`;
+}
+
+/** A measurement performed at a time and place. */
+interface Measurement {
+  /** Where was the measurement made? */
+  position: Vector3D;
+  /** When was the measurement made? In seconds since epoch. */
+  time: number;
+  /** Observed momentum */
+  momentum: Vector3D;
+}
+
+```
+
+### Item69: Provide a type for this in callbacks if its part of their API
+
+* JavaScript’s this keyword is one of the most notoriously confusing parts of the language. Unlike variables declared with let or const, which are lexically scoped, this is dynamically scoped: its value depends not on where it appears in your code but on how you get there.
+* Avoid dynamic this binding
+
+### Item70: Mirror Types to Server Dependencies
+
+### Item71: Use module augmentation to improve types
+
+* TypeScript has a few historical warts of its own. One of these is the type declaration for JSON.parse, which returns any
+  
+```ts
+// declarations/safe-json.d.ts
+interface JSON {
+  parse(
+    text: string,
+    reviver?: (this: any, key: string, value: any) => any
+  ): unknown;
+}
+
+```
+
+* Using it requires a type assertion, which is exactly what you want:
+  * `const response = JSON.parse(apiResponse) as ApiResponse;`
+* You can find a collection of improvements to the built-in types in the ts-reset npm package.
+
+## Chapter 9: Writing and running your code
+
+### Item72: Prefer ECMAscript Features to Typescript features
+
+* ⚠️ Enums_ But enums in TypeScript have some quirks. There are actually several variants on enums that all have subtly different behaviors: number-valued, string valued, const enum. 
+* ⚠️  Parameter properties:
+  * They are one of the few constructs that generate code when you compile to JavaScript (enums are another). Generally, compilation just involves erasing types.
+  * Because the parameter is only used in generated code, the source looks like it has unused parameters.
+  * A mix of parameter and nonparameter properties can hide the design of your classes.
+
+```ts
+class Person {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+// Equals to:
+class Person {
+  constructor(public name: string) {}
+}
+```
+* Namespaces and triple-slash imports
+  * before 2015: `/// <reference path="other.ts"/>`
+* Experimental decorators
+  * Decorators can be used to annotate or modify classes, methods, and properties. If a symbol is preceded by an @ sign, then it’s a decorator. They’re common in Angular and several other frameworks.
+  ```ts
+    class Greeter {
+    greeting: string;
+    constructor(message: string) {
+    this.greeting = message;
+    }
+    @logged  // <-- this is the decorator
+    greet() {
+    return `Hello, ${this.greeting}`;
+    }
+    }
+
+    function logged(originalFn: any, context: ClassMethodDecoratorContext) {
+    return function(this: any, ...args: any[]) {
+    console.log(`Calling ${String(context.name)}`);
+    return originalFn.call(this, ...args);
+    };
+    }
+
+    console.log(new Greeter('Dave').greet());
+    // Logs:
+    // Calling greet
+    // Hello, Dave
+  ```
+
+* Member Visibility Modifiers (Private, Protected, Public)
+  * ES2022 officially added support for private fields. Unlike TypeScript’s private, ECMAScript’s private is enforced both for type checking and at runtime. To use it, prefix your class property with a #:

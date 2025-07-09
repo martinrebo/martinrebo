@@ -387,7 +387,7 @@ Notes:
   * human input, persistance, 
 * Build and Agent from scratch
   * ReAct: Reasoning and acting (arxiv)
-  * # based on https://til.simonwillison.net/llms/python-react-pattern
+  * based on https://til.simonwillison.net/llms/python-react-pattern
   * Loop: Thought ⇒ Action ⇒ Pause ⇒ Observation
 * LangGraph components
   * Is an extension of LangChaing that supports Graphs
@@ -451,3 +451,31 @@ Notes:
 * Persistance and Streaming
 * Human in the Loop
 * Essay Writter. 
+
+## Building Systems with the chatGPT API
+
+date released: may 2023
+
+Syllabus
+  * Language Models, the Chat Format and Tokens
+  * Classification
+  * Moderation
+  * Chain of Thougth reasoning
+  * Chaining Prompts
+  * Check Outputs
+  * Evaluation
+
+Notes
+  * Base LLMs => Instruction Tuned LLM
+  * `import tiktoken` tiktoken is a fast BPE tokeniser for use with OpenAI's models
+  * gpt3.5-turbo ~4000 tokens limit (input context + output completion)
+  * system, Uses, Assitant messages. 
+  * supervised learning vs prompt-based AI
+  * Classification
+    * delimiter = "####" (1 token)
+  * Moderation API (free)
+  * Evaluation
+    * https://en.wikipedia.org/wiki/BLEU
+  * https://github.com/openai/evals/blob/main/evals/registry/modelgraded/fact.yaml
+
+
