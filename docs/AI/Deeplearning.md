@@ -478,4 +478,62 @@ Notes
     * https://en.wikipedia.org/wiki/BLEU
   * https://github.com/openai/evals/blob/main/evals/registry/modelgraded/fact.yaml
 
+## Vector DB: from embeddings to Apps
 
+* Launch Nov2023
+
+Syllabus:
+
+  * How to obtain Vector represantiton of Data
+  * Search for similar vectors
+  * Approximate nearest neighbours
+  * Sparse, Dense, Hybrid Search
+  * App - multilingual search
+
+Notes: 
+
+  INTRO
+  * Embbeddings: vector representations of data
+  * Searching for similiar vectors - Distance metrics
+  * Approximate Nearest Neighbours
+    * ANN - Trade recall for accuracy
+    * HNSW
+  * Vector DB - CRUD + Objects + Vctors + Inverted Index + filtered search
+  * Sparse vs Dense
+    * ANN search over Dense embeddings
+    * Sparse - Hybrid
+  * Apps of VBS in industry
+
+Distances
+  * Euclidean Distance(L2)
+  * Manhattan Distance(L1)
+  * Dot Product
+  * Cosine Distance
+
+* Dot Product and Cosine Distance are commonly used in the field of NLP, to evaluate how similar two sentence embeddings are. So here we will only use those two.
+
+Approximate Nearest Neigbours
+* NSW: Navigable Small World => Constructon => Search
+* HNSW: Hierarchical Naviable Small World
+  * Runtime: Low likehood in higher levels goes down exponentially
+  * Query time increases logarithmically
+  * O(log(N)) runtime complexity
+* NetworkX is a Python package for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks.
+
+Sparse, Dense & Hybrid
+* Dense (Semantic Search)
+  * Uses vector embedding representation of data to perform search
+  * This types of search allows one capture and return semantically similar objects
+  * baby dogs => content on puppies
+  * Limits: Out of domain data - serial numbers, 
+* Sparse search (keyword search)
+  * Bag of words: easiest way to do kw match -> count how many times a word occurs in the query and data vector and then return objects with the highest matching requencies. 
+  * Mostly Zeroes
+  * Best matching BM25:
+* Hybrid
+  * Both in one query
+  * combitate on a score system
+
+Multilingual Search
+* RAG advantages: 1. Reduce hallucinations 2. Enable LLM cite sources 3. Solve knowledge intensive task
+  
