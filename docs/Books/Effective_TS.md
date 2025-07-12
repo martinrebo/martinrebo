@@ -771,3 +771,73 @@ class Person {
 
 * Member Visibility Modifiers (Private, Protected, Public)
   * ES2022 officially added support for private fields. Unlike TypeScript’s private, ECMAScript’s private is enforced both for type checking and at runtime. To use it, prefix your class property with a #:
+
+### Item73: Use source maps to debug typescript
+
+*  broswer source
+*  node To debug this, compile it to JavaScript with sourceMap set in your tsconfig.json. Then run it with node using the --inspect-brk flag:
+*  
+
+### Item74: Know how to reconstruct types at runtime
+
+* Know your options for runtime types: using a distinct runtime type system (such as Zod), generating TypeScript types from values (json-schema-to-typescript), and generating values from your TypeScript types (typescript-json-schema).
+
+### Item75: Understand DOM hierarchy
+
+* Sometimes specialized Element classes will have properties of their own—for example, an HTMLImageElement has a src property, and an HTMLInputElement has a value property. If you want to read one of these properties off a value, its type must be specific enough to have that property.
+* With strictNullChecks enabled, you’ll need to consider the case that document.getElementById returns null. Depending on whether this can really happen, you can either add an if statement or a non-null assertion (!):
+* `const div = document.getElementById('my-div')!`
+* In addition to the hierarchy for Nodes and Elements, there is also a hierarchy for Events. TypeScript’s lib.dom.d.ts defines no fewer than 54 subtypes of Event!
+
+### Item76: Create an accurate model of your environment
+
+* It’s possible that different parts of your application run in different environments. For example, your app might have client code that runs in a browser and server code that runs under Node.js, not to mention test code that runs in its own environment. Since these are distinct environments, you’ll want to model them separately. The usual way to do this is with multiple tsconfig.json files and project references, which are discussed in Item 78.
+
+### Item77: Understand the relationship between Type checking and unit testing
+
+* Only works on type level
+```ts
+declare function updateUserById(
+  id: string,
+  update: Partial<Omit<User, 'id'>> & {id?: never}
+): Promise<User>;
+
+```
+* This is a good behavior to specify and test, even if it’s disallowed by the types. You can use an @ts-expect-error directive in your test to assert that it’s a type error:
+
+```ts
+test('invalid update', () => {
+  // @ts-expect-error Can't call updateUserById to update an ID.
+  expect(() => updateUserById('123', {id: '234'})).toReject();
+});
+```
+
+### Item78: Pay Attention to Compiler Performance
+
+* `tsc` the TS compiler and `tsserver` the TS language service
+* But an exported symbol might be unused, too, if it’s never imported anywhere. To detect that, you’ll need a more sophisticated tool like knip. This will also report unused third-party dependencies (e.g., node modules). Removing these can be a huge win since their type declarations may be many thousands of lines.
+* Prune Unused Dependencies and Dead Code
+  * $ tsc --noEmit --listFiles | xargs stat -f "%z %N" | npx webtreemap-cli
+* Incremental Builds and Project References
+* Simplify Your Types
+  * Simplify your types: avoid large unions, use interface extension rather than intersection types, and consider annotating function return types.
+
+## Chapter 10: Modernization and migration
+
+### Item79: Write modern Javascript
+* Use ECMAscript modules, use classes instead of prototypes, 
+* Use for-of or array methods like map instead of C-style for(;;) loops. The three-part C-style for loop introduces an index variable that you may not otherwise need, is easier to get wrong, and doesn’t adapt as well to iterators (as described in Item 17). See Item 60 for more on how to iterate over objects in TypeScript.
+* Prefer arrow functions to function expressions because they’re more concise and they preserve the this value from their surrounding context. Item 69 explains this binding.
+* Use Map and Set instead of objects for associative arrays. If you’ve ever tried to read the string "constructor" or "prototype" off of an object, you’ll know why. The ES2015 containers avoid the many problems that stem from JavaScript’s conflation of objects and associative arrays.
+
+### Item80: Use @ts-check and JSDoc to experiment with TS
+
+* @ts-check
+
+### Item81: Use allowJS to mix TS and JS
+
+### Item82: Convert module by module up your dependency graph
+
+### Item83: Dont consider migration complet until you enable noImplicitAny
+
+* 
