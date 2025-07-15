@@ -478,7 +478,7 @@ Notes
     * https://en.wikipedia.org/wiki/BLEU
   * https://github.com/openai/evals/blob/main/evals/registry/modelgraded/fact.yaml
 
-## Vector DB: from embeddings to Apps
+## Vector DB: from embeddings to Apps (Weviate)
 
 * Launch Nov2023
 
@@ -537,3 +537,65 @@ Sparse, Dense & Hybrid
 Multilingual Search
 * RAG advantages: 1. Reduce hallucinations 2. Enable LLM cite sources 3. Solve knowledge intensive task
   
+## Advanced Retrieval for AI with Chroma 
+
+Date: Jan 2024
+
+Syllabus
+  * Overview embeddings-base retrieval
+  * Pitfails - simple vector search fails
+  * Query expansion
+  * Cross-encoder re-ranking
+  * Embedding adaptors
+
+Notes:
+* `pip umap`: Uniform Manifold Approximation and Projection (UMAP) is a dimension reduction technique that can be used for visualisation similarly to t-SNE, but also for general non-linear dimension reduction. The algorithm is founded on three assumptions about the data:
+  - The data is uniformly distributed on a Riemannian manifold;
+  - The Riemannian metric is locally constant (or can be approximated as such);
+  - The manifold is locally connected.
+  - Proyection high-dimension into 2/3. Preservig the distance between poins.
+  - sensitive to inputs
+* `pip tqdm`: Progressions bar
+* Relenvancy and Distraction
+* Query Expansion
+  * Pass it to LLM → LLM Answer → Query result
+  * QE Expansion with generated answers
+    * https://arxiv.org/abs/2305.03653
+  * QE with multiple queries
+    * Use LLM to suggest additional queries ⇒ retrieve results for all queries
+* Cross Encoding reranking
+  * ranking: Select the top result -> Pass to LLM
+  * Sentence Tranformmers: 🤗 HF > This framework provides an easy method to compute embeddings for accessing, using, and training state-of-the-art embedding and reranker models. It can be used to compute embeddings using Sentence Transformer models (quickstart), to calculate similarity scores using Cross-Encoder (a.k.a. reranker) models (quickstart) or to generate sparse embeddings using Sparse Encoder models (quickstart). This unlocks a wide range of applications, including semantic search, semantic textual similarity, and paraphrase mining.
+  * Re-ranking with Query Expansion
+* Embedding Query adapters
+  * `pip torch`: Tensors and Dynamic neural networks in Python with strong GPU acceleration
+* Other techniques
+  * Fine-tune the embedding model
+  * Fine-tune the LLM for retrieval
+    * RA-DIT: Retrieval-Augmented Dual Instruction Tuning
+    * InstructRetro: Instruction Tuning post Retrieval-Augmented Pretraining
+  * Deep embedding adaptors
+  * Deep relevance modeling
+  * Deep chunking
+
+## Multi AI Agent Systems with crewAI
+
+Release Date: 15 May 2024
+
+Syllabus
+
+  * Ai Agents
+  * Create agents to research and write an article
+  * Multi agent customer support automation
+  * Mental framework for agent creation
+  * Agent tools
+  * Key elements of well defined tasks
+  * Automate event planning
+  * Multi agent collaboration for financial analysis
+  * Build a crew to tailor job applicaitons
+  * Next steps with Ai agents systems
+
+Notes:
+
+  * Concepts: Role playing, Focus, Tools, Cooperation, Guardrails, Memory. 
+  *  
