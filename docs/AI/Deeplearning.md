@@ -469,7 +469,7 @@ Notes
   * Base LLMs => Instruction Tuned LLM
   * `import tiktoken` tiktoken is a fast BPE tokeniser for use with OpenAI's models
   * gpt3.5-turbo ~4000 tokens limit (input context + output completion)
-  * system, Uses, Assitant messages. 
+  * system, Uses, Assistant messages. 
   * supervised learning vs prompt-based AI
   * Classification
     * delimiter = "####" (1 token)
@@ -484,7 +484,7 @@ Notes
 
 Syllabus:
 
-  * How to obtain Vector represantiton of Data
+  * How to obtain Vector representation of Data
   * Search for similar vectors
   * Approximate nearest neighbours
   * Sparse, Dense, Hybrid Search
@@ -493,12 +493,12 @@ Syllabus:
 Notes: 
 
   INTRO
-  * Embbeddings: vector representations of data
-  * Searching for similiar vectors - Distance metrics
-  * Approximate Nearest Neighbours
+  * Embeddings: vector representations of data
+  * Searching for similar vectors - Distance metrics
+  * Approximate Nearest Neighbors
     * ANN - Trade recall for accuracy
     * HNSW
-  * Vector DB - CRUD + Objects + Vctors + Inverted Index + filtered search
+  * Vector DB - CRUD + Objects + Vectors + Inverted Index + filtered search
   * Sparse vs Dense
     * ANN search over Dense embeddings
     * Sparse - Hybrid
@@ -512,9 +512,9 @@ Distances
 
 * Dot Product and Cosine Distance are commonly used in the field of NLP, to evaluate how similar two sentence embeddings are. So here we will only use those two.
 
-Approximate Nearest Neigbours
-* NSW: Navigable Small World => Constructon => Search
-* HNSW: Hierarchical Naviable Small World
+Approximate Nearest Neighbors
+* NSW: Navigable Small World => Construction => Search
+* HNSW: Hierarchical Navigable Small World
   * Runtime: Low likehood in higher levels goes down exponentially
   * Query time increases logarithmically
   * O(log(N)) runtime complexity
@@ -527,12 +527,12 @@ Sparse, Dense & Hybrid
   * baby dogs => content on puppies
   * Limits: Out of domain data - serial numbers, 
 * Sparse search (keyword search)
-  * Bag of words: easiest way to do kw match -> count how many times a word occurs in the query and data vector and then return objects with the highest matching requencies. 
+  * Bag of words: easiest way to do kw match -> count how many times a word occurs in the query and data vector and then return objects with the highest matching frequencies. 
   * Mostly Zeroes
   * Best matching BM25:
 * Hybrid
   * Both in one query
-  * combitate on a score system
+  * combinate on a score system
 
 Multilingual Search
 * RAG advantages: 1. Reduce hallucinations 2. Enable LLM cite sources 3. Solve knowledge intensive task
@@ -549,14 +549,14 @@ Syllabus
   * Embedding adaptors
 
 Notes:
-* `pip umap`: Uniform Manifold Approximation and Projection (UMAP) is a dimension reduction technique that can be used for visualisation similarly to t-SNE, but also for general non-linear dimension reduction. The algorithm is founded on three assumptions about the data:
+* `pip umap`: Uniform Manifold Approximation and Projection (UMAP) is a dimension reduction technique that can be used for visualization similarly to t-SNE, but also for general non-linear dimension reduction. The algorithm is founded on three assumptions about the data:
   - The data is uniformly distributed on a Riemannian manifold;
   - The Riemannian metric is locally constant (or can be approximated as such);
   - The manifold is locally connected.
-  - Proyection high-dimension into 2/3. Preservig the distance between poins.
-  - sensitive to inputs
+  - Projection high-dimension into 2/3. Preserving the distance between points.
+  - Sensitive to inputs
 * `pip tqdm`: Progressions bar
-* Relenvancy and Distraction
+* Relevancy and Distraction
 * Query Expansion
   * Pass it to LLM → LLM Answer → Query result
   * QE Expansion with generated answers
@@ -565,7 +565,7 @@ Notes:
     * Use LLM to suggest additional queries ⇒ retrieve results for all queries
 * Cross Encoding reranking
   * ranking: Select the top result -> Pass to LLM
-  * Sentence Tranformmers: 🤗 HF > This framework provides an easy method to compute embeddings for accessing, using, and training state-of-the-art embedding and reranker models. It can be used to compute embeddings using Sentence Transformer models (quickstart), to calculate similarity scores using Cross-Encoder (a.k.a. reranker) models (quickstart) or to generate sparse embeddings using Sparse Encoder models (quickstart). This unlocks a wide range of applications, including semantic search, semantic textual similarity, and paraphrase mining.
+  * Sentence Tranformers: 🤗 HF > This framework provides an easy method to compute embeddings for accessing, using, and training state-of-the-art embedding and reranker models. It can be used to compute embeddings using Sentence Transformer models (quickstart), to calculate similarity scores using Cross-Encoder (a.k.a. reranker) models (quickstart) or to generate sparse embeddings using Sparse Encoder models (quickstart). This unlocks a wide range of applications, including semantic search, semantic textual similarity, and paraphrase mining.
   * Re-ranking with Query Expansion
 * Embedding Query adapters
   * `pip torch`: Tensors and Dynamic neural networks in Python with strong GPU acceleration
@@ -589,13 +589,19 @@ Syllabus
   * Multi agent customer support automation
   * Mental framework for agent creation
   * Agent tools
-  * Key elements of well defined tasks
+  * Key elements of well-defined tasks
   * Automate event planning
   * Multi agent collaboration for financial analysis
-  * Build a crew to tailor job applicaitons
+  * Build a crew to tailor job applications
   * Next steps with Ai agents systems
 
 Notes:
 
   * Concepts: Role playing, Focus, Tools, Cooperation, Guardrails, Memory. 
-  *  
+  * Agent: Planner, Writer, Editor
+     * Agent: Role, goal, backstory
+     * Task: Description, expected_output, agent. 
+ *  Agent Characteristics: Role playing, Focus, Tools, Cooperation, Guardrails, Memory
+   *  
+
+
