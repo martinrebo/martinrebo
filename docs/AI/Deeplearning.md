@@ -602,6 +602,8 @@ Notes:
      * Agent: Role, goal, backstory
      * Task: Description, expected_output, agent. 
  *  Agent Characteristics: Role playing, Focus, Tools, Cooperation, Guardrails, Memory
-   *  
+*  https://serper.dev/
+*  https://docs.pydantic.dev/latest/api/base_model/
+*  
 
 
