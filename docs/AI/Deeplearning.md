@@ -606,4 +606,48 @@ Notes:
 *  https://docs.pydantic.dev/latest/api/base_model/
 *  
 
+### Attention in Transformers: Concepts and Code in PyTorch
+
+Syllabus:
+
+* The Main Ideas Behind Transformers and Attention
+* The Matrix Math for Calculating Self-Attention
+* Coding Self-Attention in PyTorch
+* Self-Attention vs Masked Self-Attention
+* The Matrix Math for Calculating Masked Self-Attention
+* Coding Masked Self-Attention in PyTorch
+* Encoder-Decoder Attention
+* Multi-Head Attention
+* Coding Encoder-Decoder Attention and Multi-Head Attention in PyTorch
+
+Notes: 
+
+* This course clearly explains the ideas behind the attention mechanism. It walks through the algorithm itself and how to code it in Pytorch. Attention in Transformers: Concepts and Code in PyTorch, was built in collaboration with StatQuest, and taught by its Founder and CEO, Josh Starmer.
+
+* The attention mechanism was a breakthrough that led to transformers, the architecture powering large language models like ChatGPT. Transformers, introduced in the 2017 paper “Attention is All You Need” by Ashish Vaswani and others, revolutionized AI with their scalable design. 
+
+* Learn how this foundational architecture works to improve your intuition about building reliable, functional, and scalable AI applications.
+
+What you’ll do: 
+
+* Understand the evolution of the attention mechanism, a key breakthrough that led to transformers.
+* Learn the relationships between word embeddings, positional embeddings, and attention.
+* Learn about the Query, Key, and Value matrices, how to produce them, and how to use them in attention.
+* Go through the math required to calculate self-attention and masked self-attention to learn how and why the equation works the way it does.
+Understand the difference between self-attention and masked self-attention, and how one is used in the encoder to build context-aware embeddings and the other is used in the decoder for generative outputs.
+* Learn the details of the encoder-decoder architecture, cross-attention, and multi-head attention, and how they are incorporated into a transformer.
+Use PyTorch to code a class that implements self-attention, masked self-attention, and multi-head attention.
+
+## Serverless Agentic Workflows with Amazon Bedrock
+
+Syllabus:
+
+* Your first agent with Amazon Bedrock
+* Connecting with a CRM
+* Performing calculations
+* Guard Rails
+* Reading the FAQ manual
+* Console Walkthrough
+
+
 
