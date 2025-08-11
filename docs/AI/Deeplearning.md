@@ -649,5 +649,16 @@ Syllabus:
 * Reading the FAQ manual
 * Console Walkthrough
 
+## Pydantic for LLM Workflows
+
+Release Date: July 2025
+
+Syllabus:
+
+* Use Pydantic to generate structured outputs from LLMs, ensuring the responses follow a specific format that your application can reliably process.
+
+* Learn data validation skills to handle a wide variety of data formatting and structuring needs in any software system.
+
+* Build a system with data validation at every stage, using Pydantic models to validate everything from user input and LLM responses to defining the parameters for tool-calling
 
 
