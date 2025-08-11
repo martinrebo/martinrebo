@@ -1,6 +1,11 @@
 # LOGS AUGUST 2025
 
-
+## 8 AUGUST 2025
+### TODO:
+- [X] Make minimum commit on expo-lab
+- [X] DL lesson
+- [x] FCC python Case Converter (13%)
+### Resources:
 
 ## 7 AUGUST 2025
 ### TODO:
