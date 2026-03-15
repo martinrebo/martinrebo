@@ -7,6 +7,7 @@ I am a Senior Full-Stack Developer with **8+ years of experience** building and 
 🔍 Currently exploring AI/ML applications and AI agents focusing on **Python, LangChain, LangGraph, VectorDBs, and RAG pipelines**. While not yet part of my professional portfolio, I’m actively building experimental projects to apply these technologies in real-world scenarios.
 
 ## 🚀 About Me
+- 🧑‍💻 Working in [**Sngular**](https://www.sngular.com/) building **Atlassian** apps for [**Appfire**](https://appfire.com/)
 - 🌍 Founder of **WarteamX LLC**, building open-source templates & consulting for startups.  
 - 🏢 Worked at **leading European corporations**:  
   - **Odigeo (eDreams)** → Travel & Booking Platform  
