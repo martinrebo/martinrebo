@@ -1,19 +1,17 @@
-# Hi there 👋 I'm Martin Rebo  
+# Hi, I'm Martin 👋  
 
-💻 **Senior Software Engineer (Full-Stack) || 8+ Years Experience**  
-
-I am a Senior Full-Stack Developer with **8+ years of experience** building and scaling web and mobile applications across startups and large European corporations. I have experience delivering products end-to-end, from architecture and backend systems to polished frontend and mobile experiences.
+Senior Full-Stack Software Engineer with 10+ years of experience designing, building, and scaling web applications, APIs, and cloud-native services for startups and global technology companies, including Appfire, Odigeo (eDreams), and Veepee (VpTech).
 
 🔍 Currently exploring AI/ML applications and AI agents focusing on **Python, LangChain, LangGraph, VectorDBs, and RAG pipelines**. While not yet part of my professional portfolio, I’m actively building side projects and deepening my expertise in this space.
 
 ## 🚀 About Me
 - 🧑‍💻 Working in [**Sngular**](https://www.sngular.com/) building **Atlassian** apps for [**Appfire**](https://appfire.com/)
-- 🌍 Founder of **WarteamX LLC**, building open-source templates & consulting for startups.  
+- 🌍 Founder of **WarteamX LLC**, building open-source templates & consulting for startups.
 - 🏢 Worked at **leading European corporations**:  
-  - **Odigeo (eDreams)** → Travel & Booking Platform  
-  - **Veepee (VpTech)** → eCommerce & Flash Sales  
-- 🔭 Currently working with **AI, React Native (Expo) + Node (Express) + AWS/GCP**.  
-- 🎯 Passionate about **Machine Learning, scalable architectures, and developer experience**.  
+  - [**Odigeo (eDreams)**](https://www.edreamsodigeo.com/) → Travel & Booking Platform  
+  - [**Veepee (VpTech)**](https://www.veepee.fr/) → eCommerce & Flash Sales   
+- 🎯 Passionate about **Machine Learning, scalable architectures, and developer experience**.
+- 🔭 Currently developing [✅ TodoApp](https://lab1.warteamx.com/sign-in) **AI, React Native (Expo) + Node (Express) + AWS/GCP + PostgreSQL**. 
 
 ## 📊 GitHub Stats
 
@@ -33,11 +31,4 @@ I am a Senior Full-Stack Developer with **8+ years of experience** building and 
 ## 📫 Connect with Me
 
 - 💼 [LinkedIn](https://linkedin.com/in/martin-rebo)  
-
----
-
-## ⚡ Fun Fact
-When I’m not coding, you’ll find me exploring **VR/AR projects, writing, or learning new technologies**.  
-
----
 ✨ *Open to collaboration, consulting, and senior engineering roles.*  
