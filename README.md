@@ -1,23 +1,20 @@
 # Hi, I'm Martin 👋  
 
-Senior Full-Stack Software Engineer with 10+ years of experience designing, building, and scaling web applications, APIs, and cloud-native services for startups and global technology companies, including Appfire, Odigeo (eDreams), and Veepee (VpTech).
-
-🔍 Currently exploring AI/ML applications and AI agents focusing on **Python, LangChain, LangGraph, VectorDBs, and RAG pipelines**. While not yet part of my professional portfolio, I’m actively building side projects and deepening my expertise in this space.
+🤓 Senior Full-Stack Software Engineer & Tech Founder with 10+ years of experience building high-scale applications.
 
 ## 🚀 About Me
-- 🧑‍💻 Working in [**Sngular**](https://www.sngular.com/) building **Atlassian** apps for [**Appfire**](https://appfire.com/)
-- 🌍 Founder of **WarteamX LLC**, building open-source templates & consulting for startups.
-- 🏢 Worked at **leading European corporations**:  
+- 🧑‍💻 Engineering top-tier [**Forge Atlassian Apps**](https://developer.atlassian.com/platform/forge/) at [*Sngular*](https://www.sngular.com/) for [*Appfire*](https://appfire.com/).
+- 🏢 Previously Worked at **leading tech corps**:  
   - [**Odigeo (eDreams)**](https://www.edreamsodigeo.com/) → Travel & Booking Platform  
-  - [**Veepee (VpTech)**](https://www.veepee.fr/) → eCommerce & Flash Sales   
-- 🎯 Passionate about **Machine Learning, scalable architectures, and developer experience**.
-- 🔭 Currently developing [✅ TodoApp](https://lab1.warteamx.com/sign-in) **AI, React Native (Expo) + Node (Express) + AWS/GCP + PostgreSQL**. 
+  - [**Veepee (VpTech)**](https://www.veepee.fr/) → eCommerce & Flash Sales  
+- 🔭 Developing my side project: [✅ TodoApp](https://lab1.warteamx.com/sign-in) **AI, React Native (Expo) + Node (Express) + AWS/GCP + PostgreSQL**.
+- 🌍 Founder of [*WarteamX LLC*](https://www.warteamx.com/), building open-source, exploring software labs to try new tech. 
 
 ## 📊 GitHub Stats
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=martinrebo&show_icons=true&theme=radical&count_private=true&include_all_commits=true)
+![GitHub Stats](https://github-stats-extended.vercel.app/api?username=martinrebo&show_icons=true&theme=radical&count_private=true&include_all_commits=true)
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=martinrebo&layout=compact&theme=radical)
+![Top Langs](https://github-stats-extended.vercel.app/api/top-langs/?username=martinrebo&layout=compact&theme=radical)
 
 ## 🛠️ Tech Stack
 
@@ -31,4 +28,4 @@ Senior Full-Stack Software Engineer with 10+ years of experience designing, buil
 ## 📫 Connect with Me
 
 - 💼 [LinkedIn](https://linkedin.com/in/martin-rebo)  
-✨ *Open to collaboration, consulting, and senior engineering roles.*  
+✨ *Open to open source collaboration and senior engineering roles.*  
